@@ -1,0 +1,93 @@
+xml:
+
+<bib>
+	<book>
+		<titre> TechnoWeb </titre>
+		<auteur> L.S </auteur>
+		<editeur> fdfdfd </editeur>
+		<annee> 2015 </annee>
+	</book>
+	<book>
+		<titre>python</titre>
+		<auteur> R.D </auteur>
+		<editeur> SU </editeur>
+		<annee> 2017 </annee>
+	</book>
+<bib/>
+
+
+JSON solution 1:
+{
+	"bib"
+	[
+		{"book":
+			{
+				"titre":"TechnoWeb"
+				"auteur":"L.S"
+		    	"editeur":"fdfdfd"
+		    	"annee":"2015"
+			}
+		}
+		{"book":
+			{
+				"titre":"Python"
+				"auteur": "R.D"
+		    	"editeur": "SU"
+		    	"annee":"2017"
+			}
+		}
+	]
+}
+
+JSON solution 2:
+{
+	"bib"
+	[
+		{"book":
+			[{"titre":"TechnoWeb"},
+			{"auteur": "L.S"},
+			{"editeur": "fdfdfd"},
+			{"annee": "2015"}]
+		}
+
+		{"book":
+			[{"titre":"Python"},
+			{"auteur": "R.D"},
+			{"editeur": "SU"},
+			{"annee": "2017"}]
+		}
+	]
+}
+
+
+Java :
+JSONObject obj = new JSonObject();
+obj.put("titre","TechnoWeb");
+obj.put("auteur": "L.S");
+obj.put("editeur": "fdfdfd");
+obj.put("annee": "2015");
+JSonObject book = new JSonObject();
+book.add ("book",obj);
+
+JSONObject obj2 = new JSonObject();
+obj2.put("titre","Python");
+obj2.put("auteur": "R.D");
+obj2.put("editeur": "SU");
+obj2.put("annee": "2017");
+JSonObject book2 = new JSonObject();
+book.add ("book2",obj2);
+
+JsonArray tab = new JsonArray();
+tab.add(book).add(book2);
+
+JsonObject bib= new JSonObject();
+bib.add("bib",tab);
+
+Java exemple_2:
+{"id":4,"nom":["toto","tata","titi"]}
+
+ArrayList<String> tab = new ArrayList<String>();
+tab.add("toto").add("tata").add("titi");
+JSonObject obj = new JSon Object();
+obj.put("id",new Int(4));
+obj.put("nom",tab);

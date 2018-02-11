@@ -1,0 +1,50 @@
+introduction SQL
+Select						| executeQuery	| ResultSset - tuples BD
+Update/Insert/Del/Create/	| executeUpdate | int nb_ligne
+grant						| execute		| boolean
+
+
+Catégorie(codecat,LibelleCat)
+Produit(CodeP,nomP,codecat#)
+serveur= localhost
+port=3306
+BD=test
+login=etu
+mdp=mdpetu
+
+ try 
+ {           
+ 	Class.forName("oracle.jdbc.driver.OracleDriver");
+ 	url="jdbc.mysql://localhost:3306/test"
+ 	user="etu"
+ 	password="mdpetu"
+ 	Connection connexion = DriverManager.getConnection(url, user, password);
+
+ 	Statement lecture =  connexion.createStatement();
+ 	requete=“select NomP from Produit p, Catégorie c where P.codeCat=C.codecat" NomP LIKE 'Ab%'";
+ 	ResultSet curseur = lecture.executeQuery(requete);
+
+ 	while (curseur.next()) 
+ 	{
+ 		out.println(curseur.getString(“Nomp”));       
+ 	}        
+ 	curseur.close();           
+ 	lecture.close();
+ 	connexion.close();        
+ }
+
+ catch(java.lang.ClassNotFoundException e) 
+ {      
+ 		System.err.print("Exception: ");      
+ 		System.err.println(e.getMessage());        
+ }
+
+ +diapo 36
+
+ Statement State=new createStatement()
+ 			ResultatSet TYPE_FORWARD
+ 			stat=setQueryThreadOut(30)
+
+ ResultatSet a=Strat executQuerry("Select...");
+
+ 
