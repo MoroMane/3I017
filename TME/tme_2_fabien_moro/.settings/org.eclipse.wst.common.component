@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
                 
         <wb-resource deploy-path="/" source-path="/services"/>
+        <wb-resource deploy-path="/" source-path="/Test"/>
                 
         <property name="context-root" value="tme_2_fabien_moro"/>
                 
