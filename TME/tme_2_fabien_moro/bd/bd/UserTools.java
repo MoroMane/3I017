@@ -1,27 +1,27 @@
 package bd;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 
 public class UserTools 
 {
 	public static boolean userExist(String user)throws SQLException
 	{
-		Connection con=DataBase.getMySqlConnection();
-		String query="SELECT id FROM users WHERE login='"+user+"';";
-		Statement st= (Statement) con.createStatement();
-		ResultSet res=st.executeQuery(query);
-		boolean retour;
-		if (res.next())
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Statement lecture = c.createStatement();
+		String query="SELECT id FROM user WHERE login='"+user+"';";
+		ResultSet curseur = lecture.executeQuery(query);		
+		boolean retour;		
+		if (curseur.next())
 			retour=true;
 		else
 			retour=false;
-		res.close();
-		st.close();
-		con.close();
+		curseur.close();
+		lecture.close();
+		c.close();
 		return retour;
 	}
 	
