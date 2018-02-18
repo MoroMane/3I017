@@ -25,14 +25,38 @@ public class UserTools
 		return retour;
 	}
 	
-	public static boolean userAdd(String user)
+	public static boolean userAdd(String user) throws SQLException
 	{
-		return true;
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Statement lecture = c.createStatement();
+		String query="INSERT into user (login) values ('"+user+"');";
+		ResultSet curseur = lecture.executeQuery(query);
+		boolean retour;		
+		if (curseur.next())
+			retour=true;
+		else
+			retour=false;
+		curseur.close();
+		lecture.close();
+		c.close();
+		return retour;
 	}
 	
-	public static boolean userDel(String user)
+	public static boolean userDel(String user) throws SQLException
 	{
-		return true;
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Statement lecture = c.createStatement();
+		String query="DELETE from user where login='"+user+"';";
+		ResultSet curseur = lecture.executeQuery(query);
+		boolean retour;	
+		if (curseur.next())
+			retour=false;
+		else
+			retour=true;
+		curseur.close();
+		lecture.close();
+		c.close();
+		return retour;
 	}
 	
 	public static boolean checkPassword(String user, String mdp)

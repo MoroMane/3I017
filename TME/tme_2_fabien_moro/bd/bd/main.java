@@ -26,6 +26,6 @@ public class main
 		curseur.close();
 		lecture.close();
 		c.close();
-		System.out.println(UserTools.userExist("3408748"));		
+		//System.out.println(UserTools.userExist("3408748"));		
 	}
 }

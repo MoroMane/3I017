@@ -5,9 +5,14 @@
 	<classpathentry kind="src" path="servicesTools"/>
 	<classpathentry kind="src" path="bd"/>
 	<classpathentry kind="src" path="Test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/users/nfs/Etu8/3408748/Bureau/tme_2_fabien_moro/WebContent/WEB-INF/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="/users/nfs/Etu8/3408748/Bureau/tme_2_fabien_moro/WebContent/WEB-INF/lib/mysql-connector-java-5.1.18-bin.jar"/>
-	<classpathentry kind="lib" path="/users/nfs/Etu8/3408748/Bureau/tme_2_fabien_moro/WebContent/WEB-INF/lib/json-org.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Fabien/Desktop/Raccourcis/L3/S6/3I017/TME/tme_2_fabien_moro/WebContent/WEB-INF/lib/json-org.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabien/Desktop/Raccourcis/L3/S6/3I017/TME/tme_2_fabien_moro/WebContent/WEB-INF/lib/mongo-2.10.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabien/Desktop/Raccourcis/L3/S6/3I017/TME/tme_2_fabien_moro/WebContent/WEB-INF/lib/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fabien/Desktop/Raccourcis/L3/S6/3I017/TME/tme_2_fabien_moro/WebContent/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
