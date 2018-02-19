@@ -161,12 +161,11 @@ public class UserTools
 	}
 	
 	
-	public static JSONObject insererDeconnexion(String login) throws SQLException
+	public static JSONObject insererDeconnexion(String key) throws SQLException
 	{
 		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
 		Statement lecture = c.createStatement();
-		int id_user=get_userId(login);
-		String query="update sessions set connect = 0 where idUser='"+id_user+"';";
+		String query="update sessions set connect = 0 where key='"+key+"';";
 		lecture.executeQuery(query);
 		lecture.close();
 		c.close();

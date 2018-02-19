@@ -50,12 +50,10 @@ public class User
 		return ret;
 	}
 	
-	public static JSONObject Logout(String login)throws JSONException, SQLException
+	public static JSONObject Logout(String key)throws JSONException, SQLException
 	{
-		if (login== null)
-			return serviceRefused.serviceRefused("login manquant",100);
-		if (!(bd.UserTools.isConnected(login)))
-			return serviceRefused.serviceRefused("User déco",100);
-		return bd.UserTools.insererDeconnexion(login);
+		if (key== null)
+			return serviceRefused.serviceRefused("key manquant",100);
+		return bd.UserTools.insererDeconnexion(key);
 	}
 }

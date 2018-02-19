@@ -26,6 +26,6 @@ public class Test_bdd
 		curseur.close();
 		lecture.close();
 		c.close();
-		//System.out.println(UserTools.userExist("3408748"));		
+		//System.out.println(bd.UserTools.userExist("3408748"));		
 	}
 }
