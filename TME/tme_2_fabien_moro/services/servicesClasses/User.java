@@ -4,69 +4,58 @@ import java.sql.SQLException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import servicesTools.serviceRefused;
 
 public class User
 {
-	public static JSONObject CreateUser(String nom,String prenom, String user, String mdp)throws JSONException, SQLException
+	public static JSONObject CreateUser(String nom,String prenom, String login, String mdp)throws JSONException, SQLException
 	{
-		JSONObject ret=new JSONObject();
-		if (bd.UserTools.userExist(user))
-		{
-			ret=serviceRefused.serviceRefused("L'utilisateur existe déjà",100);
-			return ret;
-		}
-		else
-		{
-			ret.put("Status","ok");
-			bd.UserTools.userAdd(user);
-			return ret;
-		}
+		if (nom == null || mdp == null || login == null || prenom == null)
+			return serviceRefused.serviceRefused("argument manquant",100);
+		if (bd.UserTools.userExist(login))
+			return serviceRefused.serviceRefused("user déjà existant",100);
+		return bd.UserTools.userAdd(login,nom,prenom,mdp);
 	}
 	
-	public static JSONObject DeleteUser(String nom,String prenom, String user, String mdp)throws JSONException, SQLException
+	public static JSONObject DeleteUser(String login)throws JSONException, SQLException
 	{
-		JSONObject ret=new JSONObject();
-		if (bd.UserTools.userExist(user))
-		{
-			bd.UserTools.userDel(user);
-			ret.put("Status","ok");
-			return ret;
-		}
-		else
-		{
-			ret.put("L'utilisateur n'existe pas",100);
-			return ret;
-		}
+		if (login == null)
+			return serviceRefused.serviceRefused("argument manquant",100);
+		if (!bd.UserTools.userExist(login))
+			return serviceRefused.serviceRefused("user déjà inexistant",100);
+		return bd.UserTools.userDel(login);
 	}
 	
-	public static JSONObject Login(String user, String mdp)throws JSONException, SQLException
+	public static JSONObject Login(String login, String mdp)throws JSONException, SQLException
 	{
 		JSONObject ret=new JSONObject();
-		if (!bd.UserTools.userExist(user))
+		if (!bd.UserTools.userExist(login))
 		{
 			ret.put("Status","KO");
 			ret.put("Error","Users not exists");
 			return ret;
 		}
-		if(!bd.UserTools.checkPassword(user,mdp))
+		if(!bd.UserTools.checkPassword(login,mdp))
 		{
 			ret.put("Status","KO");
 			ret.put("Error","Wrong Password");
 			return ret;
 		}
-		boolean root=bd.UserTools.isRoot(user);
-		String key = bd.UserTools.insererConnexion(user,root);
+		//boolean root=bd.UserTools.isRoot(login);
+		//String key = bd.UserTools.insererConnexion(login,root);
+		String key = bd.UserTools.insererConnexion(login);
 		ret.put("Status","OK");
 		ret.put("Key",key);
 		return ret;
 	}
 	
-	public static JSONObject Logout(String key)throws JSONException
+	public static JSONObject Logout(String login)throws JSONException, SQLException
 	{
-		JSONObject ret=new JSONObject();
-		if (bd.UserTools.insererDeconnexion(key))
-			ret.put("Status", "OK");
-		return ret;
+		if (login== null)
+			return serviceRefused.serviceRefused("login manquant",100);
+		if (!(bd.UserTools.isConnected(login)))
+			return serviceRefused.serviceRefused("User déco",100);
+		return bd.UserTools.insererDeconnexion(login);
 	}
 }

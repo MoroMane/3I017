@@ -14,13 +14,10 @@ public class DeleteUser
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
 		String login=request.getParameter("login");
-		String name=request.getParameter("name");
-		String frame=request.getParameter("frame");
-		String pwd=request.getParameter("pwd");
 		JSONObject ret=new JSONObject();
 		try
 		{
-			ret=servicesClasses.User.DeleteUser(login,name,frame,pwd);
+			ret=servicesClasses.User.DeleteUser(login);
 		}
 		catch(Exception e)
 		{

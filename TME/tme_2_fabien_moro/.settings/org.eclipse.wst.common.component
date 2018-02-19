@@ -6,6 +6,7 @@
                 
         <wb-resource deploy-path="/" source-path="/services"/>
         <wb-resource deploy-path="/" source-path="/Test"/>
+        <wb-resource deploy-path="/" source-path="/servicesTools"/>
                 
         <property name="context-root" value="tme_2_fabien_moro"/>
                 
