@@ -1,0 +1,186 @@
+TD 4 : Implémentation des Web services MongoDB
+
+Semaine prochaine TME (projet noté)
+Dans 2 semaines Interro
+
+NoSQL Orientés
+=>clefs/valeur (redis)
+=> colonnes (tibase)
+=> Documents (MongoDb)
+
+4.1 Rappel de Cours
+Question 1
+On utilise mongodb pour le traitement de large contenue
+
+=>Manipulation de données structuré
+=>Manipulation de données volumineux
+=>Efficacité de traitement (lecture/ecriture)
+
+Question 2
+MongoDB supporte xml et/ou des documents JSON.
+
+Question 3 
+Plusieur languages disponible comme le c,c++, python et le java.
+On utilisera en JAVA MongoJ pour intéragir avec la BD.
+MongoJ n'est pas générique contrairement à JDBC.
+
+4.2 MongoDB
+
+Question 1
+db.message
+{
+	_id: 
+	user_id :3
+	date: 12-07-16
+	content: "le contenu du message"
+	comments:[{ user_id:12,
+				content:"mon commentaire"
+				data : ---------- }]
+}
+
+Question 2
+db.message.insert ({user_id:3,
+					date: ---------
+					content:"mon message"})
+
+Question 3
+db.message.find() <=(SQL) Select * from message;
+==> La methode find retourne la liste de tous les messages
+[{id:--,user_id:--,content:--}
+{id:--,user_id:--,content:--}]
+
+Question 4
+La fonction find peut prendre un masque en argument du type
+{content:"le message"} retourne toute les lignes ou le message est "le message".
+Comment faire pour retourner tous les messages de l'utilisateur 123 ?
+db.find({user_id:123})
+
+
+Question 5
+inserer { user_id:123, date:-------,
+			content; "le contenu du message à l'aide de MongoJ"}
+
+public static void test_Insertion()
+{
+	//connexion à la bd
+	Mongo m = new Mongo("localhost");
+	DB db = m.get("nom_prenom") //nom de votre base de données
+	DBCollection message= db.getCollection("messages");
+	//création de la ligne à ajouter
+	BasicDBOject bdo=new BasicDBOject();
+	bdo.put("user_id", "123");
+	bdo.put("date", "la_date_du_jour");
+	bdo.put("content", "le contenu du message");
+	message.insert(bdo);
+	m.close();
+}
+
+Quuestion 6
+message.find({ "author_id:"132})
+
+public static void test2()
+{
+	//connexion
+	Mongo m = new Mongo("localhost");
+	DB db = m.get("nom_prenom") //nom de votre base de données
+	DBCollection message= db.getCollection("messages");
+	//Creer la requête
+	BasicDBOject query=new BasicDBOject();
+	query.put("author_id",132);
+	DBCursor c=message.find(query);
+	while (c.hasnext())
+	{
+		DBOject obj=c.next();
+		system.out.println(obj.getString("content"));  
+	}
+}
+
+4.4 MongoDB et les opérateurs conditionnels
+Question 1
+Ecrire le code JAVA pour la requête
+
+==> $lt, $gt (lower than, greater than)
+==> $in {id_user:{$in[1,2,5]}}
+==> $or {id_user{$or;[1,2]}}
+==> $ne not equal
+
+{id_user{$in:[155,198]}}
+
+public static void test3()
+{
+	//connexion
+	Mongo m = new Mongo("localhost");
+	BasicDBOject q1=new BasicDBOject("id_user",155);      // Avec le $in
+	BasicDBOject q2=new BasicDBOject("id_user",198);      // BasicDBOject query = new BasicDBoject();
+	List<BasicDBOject> q12=new ArrayList<BasicDBOject>(); // int authors[] = {155,192}
+	q12.add(q1);										  // query.put("user_id",new BasicDBOject("$in",authors))
+	q12.add(q2);										  //
+	BasicDBOject query=new BasicDBObject ();			  //
+	query.put("$or",q12);								  //
+	DBCursor c= message.find(query);
+	while (c.hasnext())
+	{
+		DBOject obj=c.next();
+		System.out.println(obj);
+	}
+	m.close();
+}
+
+4.3 MongoDB et les dates
+Question 1
+public static void insererDate()
+{
+	//connexion
+	Mongo m = new Mongo("localhost");
+	DB db = m.get("nom_prenom") //nom de votre base de données
+	DBCollection message= db.getCollection("messages");
+
+	//Creer la requête
+	BasicDBOject bdo=new BasicDBOject();
+	bdo.put("user_id",55);
+	bdo.put("content","mon contenu");
+	GregorianCalendar c = new java.util.GregorianCalendar();
+	date d= c.getTime();
+	bdo.put("date",d);
+
+	message.insert(bdo);
+	m.close();
+}
+
+Question 2
+public static void message_moins1 ()
+{
+	//connexion
+	Mongo m = new Mongo("localhost");
+	DB db = m.get("nom_prenom") //nom de votre base de données
+	DBCollection message= db.getCollection("messages");
+
+	Gregorian Calendar c = new GregorianCalendar();
+	c.add(Calendar.hour-1);
+	BasicDBOject q= new BasicDBOject();
+	q.put("date",newBasicDBOject("$gt",c.getTime()));
+	DBCursor dbc = message.find(q);
+	while (dbc.hasnext())
+	{
+		DBOject dbo=dbc.next();
+		System.out.println(dbo);
+	}
+}
+
+4.5 MongoDB et MySQL
+==> recupérer les amis de 256 à l'aide de int[] bd.friend.getFriends(int id)
+(SQL Selecti _difriend from friends where id_user=255)
+
+
+==> récupérer dans mongoDB les messages des amis 
+{user_id{$in:[3,25,2]}}
+
+
+
+
+
+
+
+
+
+
