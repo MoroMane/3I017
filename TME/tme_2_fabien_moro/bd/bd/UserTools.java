@@ -1,5 +1,6 @@
 package bd;
 
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,16 +10,20 @@ import java.util.Random;
 
 import org.json.JSONObject;
 
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.Mongo;
+
 import servicesTools.serviceRefused;
 import servicesTools.serviceAccepted;
 
 public class UserTools 
 {
-	public static boolean userExist(String user)throws SQLException
+	public static boolean userExist(String login)throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="SELECT id FROM user WHERE login='"+user+"';";
+		String query="SELECT login FROM Users WHERE login='"+login+"';";
 		ResultSet curseur = lecture.executeQuery(query);		
 		boolean retour;		
 		if (curseur.next())
@@ -33,9 +38,9 @@ public class UserTools
 	
 	public static JSONObject userAdd(String login, String nom, String prenom, String mdp) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="INSERT into user values ("+login+","+nom+","+prenom+","+mdp+");";
+		String query="INSERT into Users values ("+login+","+nom+","+prenom+","+mdp+");";
 		JSONObject retour = serviceAccepted.serviceAccepted();
 		try
 		{
@@ -52,9 +57,9 @@ public class UserTools
 	
 	public static JSONObject userDel(String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="DELETE from user where login='"+login+"';";
+		String query="DELETE from Users where login='"+login+"';";
 		JSONObject retour = serviceAccepted.serviceAccepted();
 		try
 		{
@@ -71,9 +76,9 @@ public class UserTools
 	
 	public static boolean checkPassword(String login, String mdp) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="select * from user where login='"+login+"' and pwd='"+mdp+"';";
+		String query="select * from Users where login='"+login+"' and pwd='"+mdp+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		boolean retour;
 		if (cursor.next())
@@ -87,13 +92,13 @@ public class UserTools
 	
 	public static boolean isRoot(String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="select * from user where login='"+login+"';";
+		String query="select * from Users where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		boolean retour;
 		boolean reponse;
-		reponse = cursor.getBoolean("isroot");
+		reponse = cursor.getBoolean("isRoot");
 		if (reponse)
 			retour= true;
 		else
@@ -105,9 +110,9 @@ public class UserTools
 	
 	public static boolean isConnected (String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="select connect from sessions where login='"+login+"';";
+		String query="select connect from Sessions where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		boolean retour=false;
 		while (cursor.next())
@@ -119,13 +124,13 @@ public class UserTools
 	
 	public static int get_userId(String login) throws SQLException
 	{		
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="select * from user where login='"+login+"';";
+		String query="select * from Users where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		int user_id=0;
 		while (cursor.next())
-			user_id=cursor.getInt("id");
+			user_id=cursor.getInt("userId");
 		lecture.close();
 		c.close();
 		return user_id;
@@ -149,11 +154,11 @@ public class UserTools
 	
 	public static String insererConnexion(String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
 		String key = generate_key();
 		int id_user = get_userId(login);
-		String query="insert into sessions values ('"+key+"',"+id_user+");";
+		String query="insert into Sessions(key_u,idUser) values ('"+key+"',"+id_user+");";
 		lecture.executeQuery(query);
 		lecture.close();
 		c.close();
@@ -163,9 +168,9 @@ public class UserTools
 	
 	public static JSONObject insererDeconnexion(String key) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/TANG_Fabien","root","root");
+		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="update sessions set connect = 0 where key='"+key+"';";
+		String query="update Sessions set connect = 0 where key_u='"+key+"';";
 		lecture.executeQuery(query);
 		lecture.close();
 		c.close();
