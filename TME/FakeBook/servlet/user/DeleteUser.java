@@ -2,21 +2,24 @@ package user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-public class Logout 
-{
+public class DeleteUser extends HttpServlet
+{	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
-		String key=request.getParameter("key");
+		String login=request.getParameter("login");
 		JSONObject ret=new JSONObject();
 		try
 		{
-			ret=servicesClasses.User.Logout(key);
+			Class.forName("com.mysql.jdbc.Driver");
+			ret=servicesClasses.User.DeleteUser(login);
 		}
 		catch(Exception e)
 		{

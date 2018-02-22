@@ -173,8 +173,8 @@ public class UserTools
 	{
 		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
-		String query="update Sessions set connect = 0 where key_u='"+key+"';";
-		lecture.executeQuery(query);
+		String query="update Sessions set connect = 0 where key='"+key+"';";
+		lecture.executeUpdate(query);
 		lecture.close();
 		c.close();
 		return serviceAccepted.serviceAccepted();
