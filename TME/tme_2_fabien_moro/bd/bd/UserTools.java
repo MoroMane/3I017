@@ -36,15 +36,15 @@ public class UserTools
 		return retour;
 	}
 	
-	public static JSONObject userAdd(String login, String nom, String prenom, String mdp) throws SQLException
+	public static JSONObject userAdd(String login, String mdp, String prenom, String nom) throws SQLException
 	{
 		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="INSERT into Users values ("+login+","+nom+","+prenom+","+mdp+");";
+		String query="insert into Users values (NULL,'"+login+"','"+mdp+"','"+prenom+"','"+nom+"');";
 		JSONObject retour = serviceAccepted.serviceAccepted();
 		try
 		{
-			lecture.executeQuery(query);
+			lecture.executeUpdate(query);
 		}
 		catch (SQLException e)
 		{
@@ -63,7 +63,7 @@ public class UserTools
 		JSONObject retour = serviceAccepted.serviceAccepted();
 		try
 		{
-			lecture.execute(query);
+			lecture.executeUpdate(query);
 		}
 		catch (SQLException e)
 		{
@@ -78,23 +78,24 @@ public class UserTools
 	{
 		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="select * from Users where login='"+login+"' and pwd='"+mdp+"';";
+		String query="select * from Users where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		boolean retour;
-		if (cursor.next())
-			retour=true;
-		else
+		if (!cursor.next())
 			retour=false;
+		else
+			retour=cursor.getString("password").equals(mdp);
 		lecture.close();
 		c.close();
 		return retour;
 	}
 	
+	//////////////////////////////////// A TESTER/DEBUGUER A PARTIR DE CI-DESSOUS////////////////////////
 	public static boolean isRoot(String login) throws SQLException
 	{
 		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
 		Statement lecture = c.createStatement();
-		String query="select * from Users where login='"+login+"';";
+		String query="select * from Sessions where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		boolean retour;
 		boolean reponse;
