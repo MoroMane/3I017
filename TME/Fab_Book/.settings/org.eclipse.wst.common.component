@@ -1,52 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                        
+                            
     
     
     
     
-    <wb-module deploy-name="Fab-book">
-                                                
+    
+    <wb-module deploy-name="Fab-Book">
+                                                        
+        
         
         
         
         
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-                                                
+                                                        
+        
         
         
         
         
         <wb-resource deploy-path="/" source-path="/services"/>
-                                        
+                                                
+        
         
         
         
         <wb-resource deploy-path="/" source-path="/Test"/>
-                                        
+                                                
+        
         
         
         
         <wb-resource deploy-path="/" source-path="/servicesTools"/>
-                                
+                                        
+        
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/servlet"/>
-                                
+                                        
+        
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/bd"/>
-                                
+                                        
         
         
-        <property name="java-output-path" value="/Fab-book/build/classes"/>
-        <property name="context-root" value="Fab-book"/>
-                                            
+        
+        <property name="java-output-path" value="/Fab-Book/build/classes"/>
+        <property name="context-root" value="Fab-Book"/>
+                                                    
+    
     
     
     
     
     </wb-module>
-                    
+                        
+
 
 
 
