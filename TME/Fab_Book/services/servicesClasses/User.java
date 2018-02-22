@@ -9,13 +9,13 @@ import servicesTools.serviceRefused;
 
 public class User
 {
-	public static JSONObject CreateUser(String nom,String prenom, String login, String mdp)throws JSONException, SQLException
+	public static JSONObject CreateUser(String login,String mdp,String prenom,String nom)throws JSONException, SQLException
 	{
 		if (nom == null || mdp == null || login == null || prenom == null)
 			return serviceRefused.serviceRefused("argument manquant",100);
 		if (bd.UserTools.userExist(login))
 			return serviceRefused.serviceRefused("user déjà existant",100);
-		return bd.UserTools.userAdd(login,nom,prenom,mdp);
+		return bd.UserTools.userAdd(login,mdp,prenom,nom);
 	}
 	
 	public static JSONObject DeleteUser(String login)throws JSONException, SQLException

@@ -7,15 +7,19 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import org.json.JSONException;
+
 
 public class Test_bdd
 {
-	public static void main(String[] args) throws SQLException, UnknownHostException 
+	public static void main(String[] args) throws SQLException, UnknownHostException, JSONException 
 	{
 		bd.UserTools.userAdd("3408748","monmdp","Fabien","Tang");
 		bd.UserTools.userAdd("3928174","montoya","Juan","Deagle");
+		servicesClasses.User.CreateUser("392811","montoy","Jua","Deage");
 		bd.UserTools.userDel("3928174");
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		bd.UserTools.userDel("392811");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		ResultSet curseur = lecture.executeQuery("Select * from Users;");
 		while (curseur.next())

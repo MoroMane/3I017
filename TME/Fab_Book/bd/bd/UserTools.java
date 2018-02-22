@@ -21,7 +21,7 @@ public class UserTools
 {
 	public static boolean userExist(String login)throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="SELECT login FROM Users WHERE login='"+login+"';";
 		ResultSet curseur = lecture.executeQuery(query);		
@@ -38,7 +38,7 @@ public class UserTools
 	
 	public static JSONObject userAdd(String login, String mdp, String prenom, String nom) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="insert into Users values (NULL,'"+login+"','"+mdp+"','"+prenom+"','"+nom+"');";
 		JSONObject retour = serviceAccepted.serviceAccepted();
@@ -57,7 +57,7 @@ public class UserTools
 	
 	public static JSONObject userDel(String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="DELETE from Users where login='"+login+"';";
 		JSONObject retour = serviceAccepted.serviceAccepted();
@@ -76,7 +76,7 @@ public class UserTools
 	
 	public static boolean checkPassword(String login, String mdp) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="select * from Users where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
@@ -90,10 +90,10 @@ public class UserTools
 		return retour;
 	}
 	
-	//////////////////////////////////// A TESTER/DEBUGUER A PARTIR DE CI-DESSOUS////////////////////////
+	//////////////////////////////////// A TESTER/DEBUGUER////////////////////////
 	public static boolean isRoot(String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="select * from Sessions where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
@@ -108,10 +108,10 @@ public class UserTools
 		c.close();
 		return retour;
 	}
-	
+	//////////////////////////////////// A TESTER/DEBUGUER////////////////////////
 	public static boolean isConnected (String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="select connect from Sessions where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
@@ -125,13 +125,13 @@ public class UserTools
 	
 	public static int get_userId(String login) throws SQLException
 	{		
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="select * from Users where login='"+login+"';";
 		ResultSet cursor=lecture.executeQuery(query);
 		int user_id=0;
 		while (cursor.next())
-			user_id=cursor.getInt("userId");
+			user_id=cursor.getInt("Id");
 		lecture.close();
 		c.close();
 		return user_id;
@@ -155,21 +155,23 @@ public class UserTools
 	
 	public static String insererConnexion(String login) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String key = generate_key();
 		int id_user = get_userId(login);
-		String query="insert into Sessions(key_u,idUser) values ('"+key+"',"+id_user+");";
-		lecture.executeQuery(query);
+		//changer dans le futur le false de boolean
+		String query="INSERT into Sessions values ("+id_user+",CURRENT_TIMESTAMP,'"+key+"',false);";
+		//System.out.println(query);
+		lecture.executeUpdate(query);
 		lecture.close();
 		c.close();
 		return key;
 	}
 	
-	
+	//////////////////////////////////// A TESTER/DEBUGUER////////////////////////
 	public static JSONObject insererDeconnexion(String key) throws SQLException
 	{
-		Connection c=DriverManager.getConnection("jdbc:mysql://localhost/fabien_3i017","root","root");
+		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
 		String query="update Sessions set connect = 0 where key_u='"+key+"';";
 		lecture.executeQuery(query);
@@ -177,7 +179,7 @@ public class UserTools
 		c.close();
 		return serviceAccepted.serviceAccepted();
 	}
-		
+
 	public static boolean insererComment(String key, String text)
 	{
 		return true;

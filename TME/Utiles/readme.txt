@@ -15,8 +15,7 @@ to		int(11)
 time		timestamp		(current_timestamp)
 
 Sessions
-Id		int(11)
-Id_user		int(11)
+id_user		int(11)
 time		timestamp 		(current_timestamp)
 key		varchar(32)
 isRoot		tinyint(1) (boolean)
