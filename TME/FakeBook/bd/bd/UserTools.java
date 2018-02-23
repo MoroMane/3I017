@@ -122,6 +122,7 @@ public class UserTools
 		c.close();
 		return retour;
 	}
+	//////////////////////////////////////////////////////////////////////////////
 	
 	public static int get_userId(String login) throws SQLException
 	{		
@@ -132,6 +133,20 @@ public class UserTools
 		int user_id=0;
 		while (cursor.next())
 			user_id=cursor.getInt("Id");
+		lecture.close();
+		c.close();
+		return user_id;
+	}
+	
+	public static int get_userId_v2(String key) throws SQLException
+	{		
+		Connection c=bd.Database.getMySqlConnection();
+		Statement lecture = c.createStatement();
+		String query="select * from Sessions s where s.key='"+key+"';";
+		ResultSet cursor=lecture.executeQuery(query);
+		int user_id=0;
+		while (cursor.next())
+			user_id=cursor.getInt("id_user");
 		lecture.close();
 		c.close();
 		return user_id;
@@ -160,7 +175,7 @@ public class UserTools
 		String key = generate_key();
 		int id_user = get_userId(login);
 		//changer dans le futur le false de boolean
-		String query="INSERT into Sessions values ("+id_user+",CURRENT_TIMESTAMP,'"+key+"',false);";
+		String query="INSERT into Sessions values ("+id_user+",CURRENT_TIMESTAMP,'"+key+"',false,0);";
 		//System.out.println(query);
 		lecture.executeUpdate(query);
 		lecture.close();
@@ -168,12 +183,11 @@ public class UserTools
 		return key;
 	}
 	
-	//////////////////////////////////// A TESTER/DEBUGUER////////////////////////
 	public static JSONObject insererDeconnexion(String key) throws SQLException
 	{
 		Connection c=bd.Database.getMySqlConnection();
 		Statement lecture = c.createStatement();
-		String query="update Sessions set connect = 0 where key='"+key+"';";
+		String query="update Sessions s set expired=true where s.key='"+key+"';";
 		lecture.executeUpdate(query);
 		lecture.close();
 		c.close();
@@ -185,13 +199,43 @@ public class UserTools
 		return true;
 	}
 	
-	public static boolean ajouterAmis(String key, String id_friend)
+	public static JSONObject ajouterAmis(String key, int id_friend) throws SQLException
 	{
-		return true;
+		Connection c=bd.Database.getMySqlConnection();
+		Statement lecture = c.createStatement();
+		int user_id=get_userId_v2(key);
+		String query="insert into Friends values ("+user_id+","+id_friend+",CURRENT_TIMESTAMP)";
+		JSONObject retour = serviceAccepted.serviceAccepted();
+		try
+		{
+			lecture.executeUpdate(query);
+		}
+		catch (SQLException e)
+		{
+			retour = serviceRefused.serviceRefused("KO",100);
+		}
+		lecture.close();
+		c.close();
+		return retour;
 	}
 	
-	public static boolean retirerAmis(String key, String id_friend)
+	public static JSONObject retirerAmis(String key, int id_friend) throws SQLException
 	{
-		return true;
+		Connection c=bd.Database.getMySqlConnection();
+		Statement lecture = c.createStatement();
+		int user_id=get_userId_v2(key);
+		String query="delete from Friends where id_user="+user_id+" and id_friend="+id_friend+";";
+		JSONObject retour = serviceAccepted.serviceAccepted();
+		try
+		{
+			lecture.executeUpdate(query);
+		}
+		catch (SQLException e)
+		{
+			retour = serviceRefused.serviceRefused("KO",100);
+		}
+		lecture.close();
+		c.close();
+		return retour;
 	}
 }

@@ -1,27 +1,19 @@
 package servicesClasses;
 
+import java.sql.SQLException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Friend 
 {
-	public static JSONObject AddFriend(String key,String id_friend)throws JSONException
+	public static JSONObject AddFriend(String key,int id_friend)throws JSONException, SQLException
 	{
-		JSONObject ret=new JSONObject();
-		if (bd.UserTools.ajouterAmis(key,id_friend))
-			ret.put("Status","ok");
-		else
-			ret.put("Status", "ko");
-		return ret;
+		return bd.UserTools.ajouterAmis(key, id_friend);
 	}
 	
-	public static JSONObject RemoveFriend(String key,String id_friend)throws JSONException
+	public static JSONObject RemoveFriend(String key,int id_friend)throws JSONException, SQLException
 	{
-		JSONObject ret=new JSONObject();
-		if (bd.UserTools.retirerAmis(key,id_friend))
-			ret.put("Status","ok");
-		else
-			ret.put("Status", "ko");
-		return ret;
+		return bd.UserTools.retirerAmis(key,id_friend);
 	}
 }
