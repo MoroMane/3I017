@@ -7,25 +7,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+import servicesTools.serviceRefused;
 
-public class AddComment 
-{	
+public class RemoveMessage {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
 		String key=request.getParameter("key");
-		String text=request.getParameter("text");
-		JSONObject ret=new JSONObject();
+		String id_message_1=request.getParameter("id_message");
+		int id_message=Integer.parseInt(id_message_1);
+		String ret=serviceRefused.serviceRefused("RemoveMessage Fail", 100).toString();
 		try
 		{
-			ret=servicesClasses.Message.AddComment(key,text);
+			//ret=servicesClasses.Message.RemoveMessage(key,id_message).toString();
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			ret=serviceRefused.serviceRefused("RemoveMessage Fail", 100).toString();
 		}
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();
-		out.print(ret.toString());
+		out.print(ret);
 	}
 }

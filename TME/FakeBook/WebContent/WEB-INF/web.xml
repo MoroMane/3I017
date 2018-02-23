@@ -26,7 +26,32 @@
 	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>user.Logout</servlet-class>
-	</servlet>	
+	</servlet>
+	
+	<servlet>
+		<servlet-name>AddMessage</servlet-name>
+		<servlet-class>message.AddMessage</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>RemoveMessage</servlet-name>
+		<servlet-class>message.RemoveMessage</servlet-class>
+	</servlet>			
+
+	<servlet>
+		<servlet-name>ListMessage</servlet-name>
+		<servlet-class>message.ListMessage</servlet-class>
+	</servlet>			
+
+	<servlet>
+		<servlet-name>AddFriend</servlet-name>
+		<servlet-class>friend.AddFriend</servlet-class>
+	</servlet>			
+	
+	<servlet>
+		<servlet-name>RemoveFriend</servlet-name>
+		<servlet-class>friend.RemoveFriend</servlet-class>
+	</servlet>			
 
 	<servlet-mapping>
 		<servlet-name>CreateUser</servlet-name>
@@ -53,4 +78,30 @@
 		<url-pattern>/Logout</url-pattern>
 	</servlet-mapping>
 	
+	<servlet-mapping>
+		<servlet-name>AddMessage</servlet-name>
+		<url-pattern>/AddMessage</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>RemoveMessage</servlet-name>
+		<url-pattern>/RemoveMessage</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet-mapping>
+		<servlet-name>ListMessage</servlet-name>
+		<url-pattern>/ListMessage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AddFriend</servlet-name>
+		<url-pattern>/AddFriend</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>RemoveFriend</servlet-name>
+		<url-pattern>/RemoveFriend</url-pattern>
+	</servlet-mapping>	
+		
 </web-app>

@@ -19,6 +19,7 @@ id_user		int(11)
 time		timestamp 		(current_timestamp)
 key		varchar(32)
 isRoot		tinyint(1) (boolean)
+expire		tinyint(1) (boolean)
 
 Users
 Id		int(11)			(auto_increment)
