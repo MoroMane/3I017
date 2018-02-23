@@ -27,3 +27,5 @@ login		varchar(64)
 password	blob
 prenom		varchar(255)
 nom		varchar(255)
+
+ssh -X ppti-14-308-05
