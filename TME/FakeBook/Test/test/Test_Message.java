@@ -12,7 +12,7 @@ import com.mongodb.DBCollection;
 
 public class Test_Message {
 	public static void main(String[] args) throws SQLException, JSONException, ClassNotFoundException, UnknownHostException {
-	DBCollection c=bd.Database.getCollection("message");
+	//DBCollection c=bd.Database.getCollection("message");
 	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","test2").toString());
 	//String id_object="gtfHVnDcynICOnbtomrIirHsVKbSZJCs";
 	//System.out.println("Remove Message: "+servicesClasses.Message.RemoveMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo",id_object));

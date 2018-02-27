@@ -18,6 +18,7 @@ public class AddMessage extends HttpServlet {
 		String ret=serviceRefused.serviceRefused("AddMessage Fail", 100).toString();
 		try
 		{
+			//Class.forName("mongodb.jdbc.MongoDriver");
 			ret=servicesClasses.Message.AddMessage(key,message).toString();
 		}
 		catch(Exception e)

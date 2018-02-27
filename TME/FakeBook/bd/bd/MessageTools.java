@@ -37,7 +37,7 @@ public class MessageTools
 		}
 		return message_co;
 	}
-	////////////////////////////////////A Coder//////////////////////////////////
+	
 	public static DBCollection RemoveMessage(String key,String id_message) throws UnknownHostException, SQLException
 	{
 		DBCollection message=Database.getCollection("message");
