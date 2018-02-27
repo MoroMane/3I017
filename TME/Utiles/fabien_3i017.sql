@@ -2,10 +2,10 @@
 -- version 4.2.12deb2+deb8u2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 23, 2018 at 03:44 PM
--- Server version: 5.5.58-0+deb8u1
--- PHP Version: 5.6.33-0+deb8u1
+-- Client :  localhost
+-- Généré le :  Mar 27 Février 2018 à 11:51
+-- Version du serveur :  5.5.58-0+deb8u1
+-- Version de PHP :  5.6.33-0+deb8u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `fabien_3i017`
+-- Base de données :  `fabien_3i017`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Friends`
+-- Structure de la table `Friends`
 --
 
 CREATE TABLE IF NOT EXISTS `Friends` (
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `Friends` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Friends`
+-- Contenu de la table `Friends`
 --
 
 INSERT INTO `Friends` (`id_user`, `id_friend`, `time`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `Friends` (`id_user`, `id_friend`, `time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Sessions`
+-- Structure de la table `Sessions`
 --
 
 CREATE TABLE IF NOT EXISTS `Sessions` (
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `Sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Sessions`
+-- Contenu de la table `Sessions`
 --
 
 INSERT INTO `Sessions` (`id_user`, `time`, `key`, `isroot`, `expired`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `Sessions` (`id_user`, `time`, `key`, `isroot`, `expired`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Structure de la table `Users`
 --
 
 CREATE TABLE IF NOT EXISTS `Users` (
@@ -100,40 +100,41 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `password` blob,
   `prenom` varchar(255) DEFAULT NULL,
   `nom` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Users`
+-- Contenu de la table `Users`
 --
 
 INSERT INTO `Users` (`id`, `login`, `password`, `prenom`, `nom`) VALUES
-(40, '3408748', 0x6d6f6e6d6470, 'Fabien', 'Tang');
+(40, '3408748', 0x6d6f6e6d6470, 'Fabien', 'Tang'),
+(118, '34587425', 0x746f746f, 'mane', 'toto');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `Friends`
+-- Index pour la table `Friends`
 --
 ALTER TABLE `Friends`
  ADD PRIMARY KEY (`id_user`,`id_friend`);
 
 --
--- Indexes for table `Users`
+-- Index pour la table `Users`
 --
 ALTER TABLE `Users`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `login` (`login`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT pour la table `Users`
 --
 ALTER TABLE `Users`
-MODIFY `id` int(64) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=118;
+MODIFY `id` int(64) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=119;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -22,9 +22,16 @@ public class MessageTools
 		DBCollection message_co=Database.getCollection("message");
 		BasicDBObject bdo=new BasicDBObject();
 		int id_user = UserTools.get_userId_v2(key);
-		bdo.put("id_user", id_user);
-		bdo.put("content", message);
-		message_co.insert(bdo);
+		if (id_user==0)
+		{
+			System.out.println("Key associé à aucun utilisateur");
+		}
+		else
+		{
+			bdo.put("id_user", id_user);
+			bdo.put("content", message);
+			message_co.insert(bdo);
+		}
 		return message_co;
 	}
 	////////////////////////////////////A Coder//////////////////////////////////

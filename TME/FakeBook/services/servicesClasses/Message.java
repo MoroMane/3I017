@@ -7,6 +7,9 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import servicesTools.serviceAccepted;
+import servicesTools.serviceRefused;
+
 import com.mongodb.DBCollection;
 
 public class Message 

@@ -28,4 +28,7 @@ password	blob
 prenom		varchar(255)
 nom		varchar(255)
 
+mongodb = use tang_fabien // show collections
+mongoexport --db tang_fabien --collection message --out tang_fabien.json
+mongoimport (à voir sur internet)
 ssh -X ppti-14-308-05

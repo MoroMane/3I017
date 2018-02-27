@@ -22,7 +22,7 @@ public class AddMessage extends HttpServlet {
 		}
 		catch(Exception e)
 		{
-			ret=serviceRefused.serviceRefused("ListMessage Fail", 100).toString();
+			ret=serviceRefused.serviceRefused("AddMessage Fail", 100).toString();
 		}
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();

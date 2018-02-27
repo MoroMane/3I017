@@ -1,0 +1,6 @@
+{ "_id" : { "$oid" : "5a952d71e4b03a69db4ec2e2" }, "id_user" : 0, "content" : "monmessage" }
+{ "_id" : { "$oid" : "5a952db2e4b0546c4cc2aec3" }, "id_user" : 0, "content" : "monmessage" }
+{ "_id" : { "$oid" : "5a953000e4b0cb56267db584" }, "id_user" : 0, "content" : "monmessage" }
+{ "_id" : { "$oid" : "5a9531eee4b06ce099a3db0e" }, "id_user" : 0, "content" : "monmessage" }
+{ "_id" : { "$oid" : "5a9531f5e4b0aa5f4a9a5571" }, "id_user" : 0, "content" : "monmessage1" }
+{ "_id" : { "$oid" : "5a95375ee4b062c6530bfe24" }, "id_user" : 40, "content" : "test2" }
