@@ -14,12 +14,11 @@ public class RemoveMessage extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
 		String key=request.getParameter("key");
-		String id_message_1=request.getParameter("id_message");
-		int id_message=Integer.parseInt(id_message_1);
+		String id_message=request.getParameter("id_message");
 		String ret=serviceRefused.serviceRefused("RemoveMessage Fail", 100).toString();
 		try
 		{
-			//ret=servicesClasses.Message.RemoveMessage(key,id_message).toString();
+			ret=servicesClasses.Message.RemoveMessage(key,id_message).toString();
 		}
 		catch(Exception e)
 		{

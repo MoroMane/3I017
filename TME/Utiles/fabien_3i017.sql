@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 27 Février 2018 à 11:51
+-- Généré le :  Mar 27 Février 2018 à 15:11
 -- Version du serveur :  5.5.58-0+deb8u1
 -- Version de PHP :  5.6.33-0+deb8u1
 
@@ -86,7 +86,9 @@ INSERT INTO `Sessions` (`id_user`, `time`, `key`, `isroot`, `expired`) VALUES
 (40, '2018-02-23 13:17:59', 'BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo', 0, 0),
 (40, '2018-02-23 13:22:33', 'jgAoxGWhXcRbGVxcsoJdgooGMTCEEwYP', 0, 0),
 (40, '2018-02-23 13:25:11', 'ByEjjWBWcxrcEVBNewsiWfTjMqErbEHT', 0, 0),
-(40, '2018-02-23 13:32:29', 'JhsYKuQsSzLwlLXLWPCvMGTwAAmxOpMA', 0, 0);
+(40, '2018-02-23 13:32:29', 'JhsYKuQsSzLwlLXLWPCvMGTwAAmxOpMA', 0, 0),
+(40, '2018-02-27 13:06:19', 'oPgzAKpwHAktjmJUpmCziJXSlKbCLeCI', 0, 0),
+(40, '2018-02-27 13:36:50', 'evBCZguYmzichYzjITbzWFBLdwhQtxlc', 0, 0);
 
 -- --------------------------------------------------------
 

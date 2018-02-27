@@ -14,6 +14,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.BasicDBObject;
+import bd.UserTools;
 
 public class MessageTools
 {
@@ -22,6 +23,7 @@ public class MessageTools
 		DBCollection message_co=Database.getCollection("message");
 		BasicDBObject bdo=new BasicDBObject();
 		int id_user = UserTools.get_userId_v2(key);
+		String alea=UserTools.generate_key();
 		if (id_user==0)
 		{
 			System.out.println("Key associé à aucun utilisateur");
@@ -30,18 +32,29 @@ public class MessageTools
 		{
 			bdo.put("id_user", id_user);
 			bdo.put("content", message);
+			bdo.put("id_message", alea);
 			message_co.insert(bdo);
 		}
 		return message_co;
 	}
 	////////////////////////////////////A Coder//////////////////////////////////
-	public static DBCollection RemoveMessage(String key,int id_message) throws UnknownHostException, SQLException
+	public static DBCollection RemoveMessage(String key,String id_message) throws UnknownHostException, SQLException
 	{
 		DBCollection message=Database.getCollection("message");
 		int id_user = UserTools.get_userId_v2(key);
+		if (id_user==0)
+		{
+			System.out.println("Key associé à aucun utilisateur");
+		}
+		else
+		{
+			BasicDBObject query=new BasicDBObject();
+			query.append("id_user",id_user);
+			query.append("id_message",id_message);
+			message.remove(query);
+		}
 		return message;
 	}
-	
 	////////////////////////////////////A TESTER/DEBUGUER////////////////////////
 	public static List<String> ListMessage(List<String> users) throws UnknownHostException
 	{	
