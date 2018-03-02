@@ -108,7 +108,7 @@ public class UserTools
 		c.close();
 		return retour;
 	}
-	//////////////////////////////////// A TESTER/DEBUGUER////////////////////////
+
 	public static boolean isConnected (String login) throws SQLException
 	{
 		Connection c=bd.Database.getMySqlConnection();

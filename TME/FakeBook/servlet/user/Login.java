@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+@SuppressWarnings("serial")
 public class Login extends HttpServlet
 {	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException

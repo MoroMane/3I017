@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ public class Message
 		return bd.MessageTools.AddMessage(key,message);
 	}
 	
-	public static DBCollection RemoveMessage(String key,String id_message)throws JSONException, UnknownHostException, SQLException
+	public static DBCollection RemoveMessage(String key,ObjectId id_message)throws JSONException, UnknownHostException, SQLException
 	{
 		return bd.MessageTools.RemoveMessage(key,id_message);
 	}

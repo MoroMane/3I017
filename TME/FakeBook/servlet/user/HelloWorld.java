@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class HelloWorld
  */
+@SuppressWarnings("serial")
 public class HelloWorld extends HttpServlet {
  
  /**

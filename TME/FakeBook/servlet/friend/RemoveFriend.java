@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+@SuppressWarnings("serial")
 public class RemoveFriend extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
@@ -19,6 +20,7 @@ public class RemoveFriend extends HttpServlet {
 		JSONObject ret=new JSONObject();
 		try
 		{
+			Class.forName("com.mysql.jdbc.Driver");
 			ret=servicesClasses.Friend.RemoveFriend(key,id_friend);
 		}
 		catch(Exception e)

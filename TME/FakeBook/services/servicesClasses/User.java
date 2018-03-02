@@ -23,7 +23,7 @@ public class User
 		if (login == null)
 			return serviceRefused.serviceRefused("argument manquant",100);
 		if (!bd.UserTools.userExist(login))
-			return serviceRefused.serviceRefused("user déjà inexistant",100);
+			return serviceRefused.serviceRefused("user inexistant",100);
 		return bd.UserTools.userDel(login);
 	}
 	

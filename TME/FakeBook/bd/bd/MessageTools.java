@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.BasicBSONObject;
+import org.bson.types.ObjectId;
 import org.json.JSONObject;
 
 import com.mongodb.DB;
@@ -14,6 +15,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.BasicDBObject;
+
 import bd.UserTools;
 
 public class MessageTools
@@ -23,7 +25,6 @@ public class MessageTools
 		DBCollection message_co=Database.getCollection("message");
 		BasicDBObject bdo=new BasicDBObject();
 		int id_user = UserTools.get_userId_v2(key);
-		String alea=UserTools.generate_key();
 		if (id_user==0)
 		{
 			System.out.println("Key associé à aucun utilisateur");
@@ -32,13 +33,12 @@ public class MessageTools
 		{
 			bdo.put("id_user", id_user);
 			bdo.put("content", message);
-			bdo.put("id_message", alea);
 			message_co.insert(bdo);
 		}
 		return message_co;
 	}
 	
-	public static DBCollection RemoveMessage(String key,String id_message) throws UnknownHostException, SQLException
+	public static DBCollection RemoveMessage(String key,ObjectId id_message) throws UnknownHostException, SQLException
 	{
 		DBCollection message=Database.getCollection("message");
 		int id_user = UserTools.get_userId_v2(key);
@@ -50,7 +50,7 @@ public class MessageTools
 		{
 			BasicDBObject query=new BasicDBObject();
 			query.append("id_user",id_user);
-			query.append("id_message",id_message);
+			query.append("id_message",id_message.toString());
 			message.remove(query);
 		}
 		return message;
