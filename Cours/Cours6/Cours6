@@ -1,0 +1,34 @@
+Javascript
+
+13/40
+Var i = variable locale
+i = variable globale
+
+15/40
+On peut ne peut passer de paramètre dans une fonction necessitant des arguments
+
+16/40 
+Le premier alert est réalisé avec le x à l'ext car le x de fonc est local
+
+
+
+19/40
+var obj=new Object ()
+var obj={x:1 , y:'chaine'}
+
+var x=obj.couleur;
+var x=obj[’couleur’];
+
+28/40
+Les valeurs prototypiques pour attributs 1 et 2 n’ ont aucun effet // car priorité aux valeurs données au constructeur
+
+29/40
+Les attributs privés sont définitivement définis à la création
+
+30/40
+A noter : Les changements de prototype n’ ont pas d’ effet sur les objets déjà créés // Mais les changements dans le prototype en ont !
+
+31/40
+++
+
+
