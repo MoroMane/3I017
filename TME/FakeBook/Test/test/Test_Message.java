@@ -13,8 +13,8 @@ import com.mongodb.DBCollection;
 
 public class Test_Message {
 	public static void main(String[] args) throws SQLException, JSONException, ClassNotFoundException, UnknownHostException {
-	DBCollection c=bd.Database.getCollection("message");
-	//Tester à la fac
+	//DBCollection c=bd.Database.getCollection("message");
+	//Tester ï¿½ la fac
 	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","test2").toString());
 	//System.out.println(servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","test2").toString()=="message");
 	//String id_object="5a9995ace4b0caa8b02ed840";

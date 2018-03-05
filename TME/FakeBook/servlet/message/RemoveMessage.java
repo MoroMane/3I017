@@ -23,7 +23,8 @@ public class RemoveMessage extends HttpServlet {
 		try
 		{
 			ObjectId objid = new ObjectId(id_message);
-			ret=servicesClasses.Message.RemoveMessage(key,objid).toString();
+			if(servicesClasses.Message.RemoveMessage(key,objid))
+				ret=serviceAccepted.serviceAccepted().toString();
 		}
 		catch(Exception e)
 		{

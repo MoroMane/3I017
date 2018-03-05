@@ -20,7 +20,7 @@ import bd.UserTools;
 
 public class MessageTools
 {
-	public static DBCollection AddMessage(String key,String message) throws UnknownHostException, SQLException
+	public static boolean AddMessage(String key,String message) throws UnknownHostException, SQLException
 	{
 		DBCollection message_co=Database.getCollection("message");
 		BasicDBObject bdo=new BasicDBObject();
@@ -28,23 +28,25 @@ public class MessageTools
 		if (id_user==0)
 		{
 			System.out.println("Key associé à aucun utilisateur");
+			return false;
 		}
 		else
 		{
 			bdo.put("id_user", id_user);
 			bdo.put("content", message);
 			message_co.insert(bdo);
+			return true;
 		}
-		return message_co;
 	}
 	
-	public static DBCollection RemoveMessage(String key,ObjectId id_message) throws UnknownHostException, SQLException
+	public static boolean RemoveMessage(String key,ObjectId id_message) throws UnknownHostException, SQLException
 	{
 		DBCollection message=Database.getCollection("message");
 		int id_user = UserTools.get_userId_v2(key);
 		if (id_user==0)
 		{
 			System.out.println("Key associé à aucun utilisateur");
+			return false;
 		}
 		else
 		{
@@ -52,8 +54,8 @@ public class MessageTools
 			query.append("id_user",id_user);
 			query.append("id_message",id_message.toString());
 			message.remove(query);
+			return true;
 		}
-		return message;
 	}
 	////////////////////////////////////A TESTER/DEBUGUER////////////////////////
 	public static List<String> ListMessage(List<String> users) throws UnknownHostException

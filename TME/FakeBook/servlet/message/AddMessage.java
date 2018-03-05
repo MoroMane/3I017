@@ -21,7 +21,8 @@ public class AddMessage extends HttpServlet {
 		try
 		{
 			//Class.forName("mongodb.jdbc.MongoDriver");
-			ret=servicesClasses.Message.AddMessage(key,message).toString();
+			if (servicesClasses.Message.AddMessage(key,message))
+				ret=serviceAccepted.serviceAccepted().toString();
 		}
 		catch(Exception e)
 		{

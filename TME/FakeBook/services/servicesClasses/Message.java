@@ -15,12 +15,12 @@ import com.mongodb.DBCollection;
 
 public class Message 
 {
-	public static DBCollection AddMessage(String key,String message)throws JSONException, UnknownHostException, SQLException
+	public static boolean AddMessage(String key,String message)throws JSONException, UnknownHostException, SQLException
 	{
 		return bd.MessageTools.AddMessage(key,message);
 	}
 	
-	public static DBCollection RemoveMessage(String key,ObjectId id_message)throws JSONException, UnknownHostException, SQLException
+	public static boolean RemoveMessage(String key,ObjectId id_message)throws JSONException, UnknownHostException, SQLException
 	{
 		return bd.MessageTools.RemoveMessage(key,id_message);
 	}
