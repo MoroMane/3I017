@@ -1,0 +1,31 @@
+<balise> contenu </balise>
+-> langage contenu/structure
+CSS : langage du mise en page
+
+En TP faire :
+
+=> Page de connexion (appel login)
+=> Page Inscription (appel login)
+=> Page Principal (voir 5.2)
+=> Page de profil
+
+5.1 - Formulaire d'enregistrement et de connexion
+
+Question 1
+
+<table>
+	<tr>
+		<td>
+		</td>
+	</tr>
+</table>
+
+<!doctype html>
+<html>
+	<head><!--en tête>
+		<title> connexion </title> //titre de la page
+		<link href = "tableau_connection.css" rel="stylesheet" type="text/css">
+	<head>
+	<body> //corps du html
+		<h1> Ouvrir session </h1>
+		<form method=get

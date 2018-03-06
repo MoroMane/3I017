@@ -1,0 +1,92 @@
+<balise> contenu </balise>
+-> langage contenu/structure
+CSS : langage du mise en page
+
+En TP faire :
+
+=> Page de connexion (appel login)
+=> Page Inscription (appel login)
+=> Page Principal (voir 5.2)
+=> Page de profil
+
+5.1 - Formulaire d'enregistrement et de connexion
+
+Question 1
+<!doctype html>
+<html>
+	<head> //en tête>
+		<title> connexion </title> //titre de la page
+		<link href = "tableau_connection.css" rel="stylesheet" type="text/css">
+	</head>
+	<body> //corps du html
+		<h1> Ouvrir session </h1>
+		<form method="get" action="javascript:connexion">
+			<table id="t1" border=0>
+				<tr>
+					<td> login </td> 
+					<td> <input type ="text" name="nom"/> </td>
+				</tr>
+				<tr>
+					<td> Mot de passe </td>
+					<td> <input type ="password" name="pass"/> </td>
+				</tr>
+				<tr>
+					<td><input type ="submit" value="connexion"/> </td>
+				</tr>
+				<td> 
+					<table id="t2">
+						<tr>
+							<td> <a href="---"> Mot de passe perdu </a> </td>
+						</tr>
+						<tr>
+							<td> <a href="---"> Pas encore inscrit ?</a> </td>
+						</tr>
+					</table>
+				</td>
+			</table>
+		</form>
+	</body>
+</html>
+
+Question 2 - (voir tableau_connexion.css)
+Question 3
+<body>
+	<div id="connexion_main">
+		<h1> Ouvrir session </h1>
+		<form action="javascript:(function(){return;})()" method="post"/>
+		<div class="ids">
+			<span> Login </span>
+			<input type="text" name="login"/>
+		</div>
+		<div class="ids">
+			<span> Pass </span>
+			<input type="submit" value="connexion"/>
+		</div>
+		<div class ="links">
+			<div id="links1"> Mot de passe oublié </div>
+			<div id="links2"> Inscription </div>
+		</form>
+	</div>
+</body>
+Question 4 - voir question4.css
+
+5.2 Page principale
+Question 1 
+<!Doctype html>
+<html>
+	<head>
+		<link href="main_simple.css" rel="stylesheet" type="textcss">
+	</head>
+	<body>
+		<div id="top">
+			<div id="logo"></div>
+			<div id="search"></div>
+			<div id="Connect"></div>
+		</div>
+		<div id="left"></div>
+		<div id="main">
+			<div id="new_message"></div>
+			<div id="messages"></div>
+		</div>
+	</body>
+</html>
