@@ -1,0 +1,22 @@
+#connexion_main h1{
+	/*margin-bottom:30px;*/
+	text-shadow: 1px, 1px, 0px black;
+}
+
+#connexion_main .ids {
+	/*margin-top: 30px*/
+	/*margin-left:20px;*/
+	position:relative;
+}
+
+#connexion_main .buttons{
+	display: inline-block;
+	text-align: center;
+	float:left;
+}
+
+#connexion_main .links{
+	display: inline-block;
+	margin-left:10px;
+	position:relative;
+}

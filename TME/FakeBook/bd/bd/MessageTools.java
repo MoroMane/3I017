@@ -51,8 +51,8 @@ public class MessageTools
 		else
 		{
 			BasicDBObject query=new BasicDBObject();
+			query.append("_id",id_message);
 			query.append("id_user",id_user);
-			query.append("id_message",id_message.toString());
 			message.remove(query);
 			return true;
 		}
