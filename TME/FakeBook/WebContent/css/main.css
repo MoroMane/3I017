@@ -1,47 +1,65 @@
 #header{
-	text-align: center;
+	text-align: right;
 	background-color: #3b5998;
-	color: white;
-	text-decoration: none;
+	width:100%;
+	height: 50px;
+	position:absolute;
+	top:0;
+	left:0;
 }
 
 body{
 	background-color:#dfe3ee;
-	background-repeat: no-repeat;
-	width: 100%;
-	height:700px;
 }
 
 fieldset{
 	background-color: white;
+	width: 780px;
 }
 
 #header #logo{
 	display:inline-block;
+	position: absolute;
+	top:0px;
+	left:0px;
 }
 
 #header #search{
 	display:inline-block;
+	position: absolute;
+	top:-5px;
+	left:50px;
 }
 
-#header #connect{
+#header #connect {
+	color:white;
+	position:absolute;
+	right:10px;
+	top:-5px;
+}
+
+#header #connect a {
 	display:inline-block;
+	text-decoration: none;
+	color:white;
 }
 
 #left{
 	display : inline-block;
+	position : absolute;
+	top:55px;
 	width:20%;
 	height:20px;
-	vertical-align:top;
+	background-color: #ABF3E9;
 }
 
 #main {
 	display: inline-block;
-	width:70%;
-	vertical-align: top;
+	position: absolute;
+	left:550px;
 }
 
-#main #new_message {
+#new_message {
 	margin-top: 30px;
 	width:90%;
 	/*background-color: #ABF3E9;*/
