@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servicesTools.serviceAccepted;
+import org.json.JSONObject;
 import servicesTools.serviceRefused;
 
 @SuppressWarnings("serial")
@@ -17,19 +17,18 @@ public class AddMessage extends HttpServlet {
 	{
 		String key=request.getParameter("key");
 		String message=request.getParameter("message");
-		String ret=serviceRefused.serviceRefused("AddMessage Fail", 100).toString();
+		JSONObject ret=new JSONObject();
 		try
 		{
-			//Class.forName("mongodb.jdbc.MongoDriver");
-			if (servicesClasses.Message.AddMessage(key,message))
-				ret=serviceAccepted.serviceAccepted().toString();
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				ret=servicesClasses.Message.AddMessage(key,message);
 		}
 		catch(Exception e)
 		{
-			ret=serviceRefused.serviceRefused("AddMessage Fail", 100).toString();
+			ret=serviceRefused.serviceRefused("AddMessage Fail", 100);
 		}
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();
-		out.print(ret);
+		out.print(ret.toString());
 	}
 }

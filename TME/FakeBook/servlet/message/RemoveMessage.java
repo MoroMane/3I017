@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.bson.types.ObjectId;
-
-import servicesTools.serviceAccepted;
+import org.json.JSONObject;
 import servicesTools.serviceRefused;
 
 @SuppressWarnings("serial")
@@ -19,19 +18,19 @@ public class RemoveMessage extends HttpServlet {
 	{
 		String key=request.getParameter("key");
 		String id_message=request.getParameter("id_message");
-		String ret=serviceRefused.serviceRefused("RemoveMessage Fail", 100).toString();
+		JSONObject ret=new JSONObject();
 		try
 		{
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			ObjectId objid = new ObjectId(id_message);
-			if(servicesClasses.Message.RemoveMessage(key,objid))
-				ret=serviceAccepted.serviceAccepted().toString();
+			ret=servicesClasses.Message.RemoveMessage(key,objid);
 		}
 		catch(Exception e)
 		{
-			ret=serviceRefused.serviceRefused("RemoveMessage Fail", 100).toString();
+			ret=serviceRefused.serviceRefused("RemoveMessage Fail", 100);
 		}
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();
-		out.print(ret);
+		out.print(ret.toString());
 	}
 }

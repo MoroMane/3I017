@@ -31,6 +31,7 @@ public class Database
 		return dataSource.getConnection();
 	}
 	
+	@SuppressWarnings("unused")
 	public static Connection getMySqlConnection() throws SQLException
 	{
 		if (DBStatic.mysql_pooling==false)

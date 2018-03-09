@@ -14,7 +14,6 @@ import com.mongodb.DBCollection;
 public class Test_Message {
 	public static void main(String[] args) throws SQLException, JSONException, ClassNotFoundException, UnknownHostException {
 	//DBCollection c=bd.Database.getCollection("message");
-	//Tester � la fac
 	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","test22"));
 	//System.out.println(servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","test22"));
 	//String id_object="5a9e9478e4b00288e238df96";

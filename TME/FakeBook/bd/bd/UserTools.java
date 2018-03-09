@@ -1,18 +1,11 @@
 package bd;
 
-import java.net.UnknownHostException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
-
 import org.json.JSONObject;
-
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.Mongo;
 
 import servicesTools.serviceRefused;
 import servicesTools.serviceAccepted;
