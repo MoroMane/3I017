@@ -5,5 +5,10 @@
 #enregistrement_main .buttons{
 	display: inline-block;
 	text-align: center;
-	float:left;
+	float:center;
+}
+
+body{
+	background-color:#c0deed;
+	text-align: center;
 }

@@ -12,11 +12,16 @@
 #connexion_main .buttons{
 	display: inline-block;
 	text-align: center;
-	float:left;
+	float:center;
 }
 
 #connexion_main .links{
 	display: inline-block;
-	margin-left:10px;
+	/*margin-left:10px;*/
 	position:relative;
+}
+
+body{
+	background-color:#c0deed;
+	text-align: center;
 }
