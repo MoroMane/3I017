@@ -1,4 +1,4 @@
-#header{
+header{
 	text-align: right;
 	background-color: #0084b4;
 	width:100%;
@@ -17,34 +17,34 @@ fieldset{
 	width: 780px;
 }
 
-#header #logo{
+header #logo{
 	display:inline-block;
 	position: absolute;
 	top:4px;
 	left:4px;
 }
 
-#header #search{
+header #search{
 	display:inline-block;
 	position: absolute;
 	top:-5px;
 	left:50px;
 }
 
-#header #connect {
+header #connect {
 	color:white;
 	position:absolute;
 	right:10px;
 	top:-5px;
 }
 
-#header #connect a {
+header #connect a {
 	display:inline-block;
 	text-decoration: none;
 	color:white;
 }
 
-#left{
+nav{
 	display : inline-block;
 	width:20%;
 	vertical-align: top;
