@@ -1,0 +1,34 @@
+==> html/CSS
+	- page non dynamique
+	- intéraction limité
+
+==> langage de script (javascript)
+	- modifications des élements
+	- réaction à une action
+	- communication client/serveur
+
+Javascript
+	- variable global	"x=5"
+	- variable local	"var x=5"
+	- les tableaux		var tab = [0,1,5,3]
+						var tab2 = new Array() //creer un tableau vide
+						tab2[1]=3
+
+Les objets
+1) monObjet={"a":2, "b":3}
+==> créer un objet avec les attriuts a et b
+
+2) Avec un constructeur
+	fonction MonObjet (p1,p2)
+	{
+		var a1=p1;
+		this.a2=p2;
+		X var methode_privée = function () {alert(a1)};
+		X this.methode_public = function () {alert(a2)};
+	}
+
+Instancier objet
+var obj=new MonObjet(2,4);
+MonObjet.prototype.methode_public=function(){alert(a2)};
+MonObjet.prototype.a1=2;
+
