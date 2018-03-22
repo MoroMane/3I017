@@ -1,27 +1,25 @@
-#connexion_main h1{
-	/*margin-bottom:30px;*/
-	text-shadow: 1px, 1px, 0px black;
-}
-
-#connexion_main .ids {
-	/*margin-top: 30px*/
-	/*margin-left:20px;*/
-	position:relative;
-}
-
-#connexion_main .buttons{
+#buttons{
 	display: inline-block;
 	text-align: center;
 	float:center;
 }
 
-#connexion_main .links{
+#links{
 	display: inline-block;
 	/*margin-left:10px;*/
 	position:relative;
 }
 
+#connexion{
+	font-size: 20px;
+}
+
 body{
 	background-color:#c0deed;
 	text-align: center;
+	background-image:url(341359.jpg);
+	background-repeat: no-repeat;
+	background-size: 2000px;
+	color:white;
+
 }
