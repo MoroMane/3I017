@@ -3,8 +3,7 @@ function init()
 	nbConnection=true;
 	env=new Object();
 	SetVirtualDB();
-	var m1=new Message("2","toto","ok",new Date(),["bonjour","toto"]);
-	alert (m1.getHTML());
+	var m1=new Message("id42","3408748","ceci est un texte",new Date(),["comment1","comment2"]);
 	document.getElementById("main").innerHTML=m1.getHTML();
 }
 
@@ -38,10 +37,15 @@ function Message(id,login,text,date,comments)
 
 Message.prototype.getHTML=function()
 {
-	var s= "<div id=\"message\"" + this.id+ "class=message>";
-	s+= "<div class=\"text_message\">" + this.text + "</div>";
-	s+= "<div class=\"infos message\">";
-	s+= "<span> Post de <span class=link.onclick=javascript.pageUser("+this.login+")>";
-	s+="</span></span></div></div>";
+	var s="<div id=\"message\" Liste Message";
+	s+="<br>";
+	s+="Message: "+this.id;
+	s+="</div>";
+
+	//var s= "<div id=\"message\"" + this.id+ "class=message>";
+	//s+= "<div class=\"text_message\">" + this.text + "</div>";
+	//s+= "<div class=\"infos_message\">";
+	//s+= "<span> Post de <span class=link.onclick=javascript.pageUser("+this.login+")>";
+	//s+="</span></span></div></div>";
 	return s;
 }
