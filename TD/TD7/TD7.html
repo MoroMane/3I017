@@ -1,0 +1,38 @@
+TD 7 - Javascript-Jquery
+
+Jquery:
+
+Bibliothèque javascript
+- Modification du DOM (html/css)
+- Communication client/serveur via AJAX
+
+Objet document ==> Objet de la page web
+==> Pour un formulaire de non formulaireConnexion
+document.formulaireConnxion/login //Accède à l'input login
+document.forms[0].elements[0]  //accède au premier élément du premier fomulaire
+document.forms["formulaireConnexion"].elements["login"]
+
+Question 1
+
+<!DOCTYPE html>
+	<html>
+		<head>
+			<link href="connexion.css" rel="stylesheet" />
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		</head>
+		<body>
+			<form action="javascript: (function(){return;})()" method="get" onSubmit=\"javascript:connexion(this)\">
+				<div class="ids"><span> login </span> <input type="text" name="login" /> </div>
+				<div class "ids"><span> Mot de passe </span> <input type="password" name="pass" /></div>
+				<input type="submit" value="connexion"/>
+				liens
+			</form>
+		</body>
+	</html>
+
+Question 4
+Dans le HTML (Index.html)
+<script type="text/javascript">
+	$(init);
+	$(makeConnexionPanel);
+</script>
