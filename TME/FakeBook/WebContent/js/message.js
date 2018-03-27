@@ -1,6 +1,6 @@
 function init()
 {
-	nbConnection=true;
+	noConnection=true;
 	env=new Object();
 	SetVirtualDB();
 	document.getElementById("liste_message").innerHTML=localdb[1].getHTML() + localdb[2].getHTML() + localdb[3].getHTML();
