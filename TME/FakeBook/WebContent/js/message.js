@@ -74,56 +74,112 @@ Commentaire.prototype.getHTML=function()
 	return s;
 }
 
-/* POUR PLUS TARD */
-/*
-function revival(key,value)
+function getFromLocalDB(fromId,minId,maxId,nbMax)
 {
-	if (value.comments!=undefined)
-	{
-		var c= new Message(value.id,value.auteur,value.date,value.comments);
-		return c;
-	}
-	else if (value.text!=undefined)
-	{
-		var c = new commentaire(value.id,value.auteur,value.text,value.date);
-		return c;
-	}
-	else if (key=="date")
-	{
-		var d=new Date(value);
-		return d;
-	}
-	return value;
+	var tab=[];
+	var nb=0;
+	var f=new Set();
+	if (from>0)
+		f=follows[from];
+	for (var i=localdb.length-1;i>=0;i--)
+		tab.append(localdb[i]);
+	return tab;
 }
 
-function makeMainPanel(fromId,fromLogin,query)
+function completeMessages()
 {
-	env.msgs=[]
-	if (fromId=undefined)
-	{
-		fromId=-1;
-	}
-	env.fromId=fromId;
-	env.fromLogin=fromLogin;
-	console.log(env.fromLogin);
-	env.query=query;
-	var s="<header id=top";
-	if (env.fromId < 0)
-		s+="<div id=title> Actualités </div>";
+	if (!noConnection){}
 	else
 	{
-		if (!env.follows.has(env.fromId))
-		{
-			s+="<div id=\"title\"> Page de " + fromLogin + "</div>"
-			s+="<div class = \"add\"> <img src=\"Images/add.png\" title=\"suivre\" onclick='Javascript:follow()'></div></div>";
-		}
-		else
-		{
-			s+="<div id=\"title\"> Page de " + fromLogin + "</div>"
-			s+="<div class = \"add\"> <img src=\"Images/remove.png\" title=\"suivre\" onclick='Javascript:stopfollow()'></div></div>";
-		}
+		var tab=getFromLocalDB(env.fromId,-1,env.minId,1);
+		completeMessagesReponse(JSON.stringify(tab));
 	}
-	s+="</div> <div id=\"connect\"> <span id=\"log\" pageUser("+env.id+","+env.login+")\")>"
-	s+="<div class = \"add\"> <img src=\"Images/disco.png\" title=\"suivre\" onclick='Javascript:disconnect()'></div></div>";
 }
-*/
+
+function completeMessagesReponse(rep) 
+{
+	var tab = (JSON.parse(rep, revival)).messages;
+	for (var i=0; i < tab.length; i++) 
+	{
+		var m = listeMessages[i];
+		$("#message").append(m.getHtml());
+		env.messages[m.id] = m;
+		if (m.id > env.maxId)
+			env.maxId = m.id;
+		if (m.id < env.minId)
+			env.minId = m.id;
+	}
+}
+//Pour l'enregistrement procéder de la même manière (avec makeConnexionPanel)
+function developpeMessage(id)
+{
+	var m=env.msg[id];
+	var el=$("#message "+id+".comments");
+	for (var i=0;i<m.length;i++)
+	{
+		var i=m.comments[i];
+		el.append(c.getHTMl());
+	}
+	el=$("#message "+id+".new_comment");
+	el.append("<form name=\"new_comment_form\" id=\"new_comment_form\" action=\"javascript:func_new_comment("+id+")\")");
+	$("#message "+id+" img").replaceWith("<img src=\"----\" on onClick=\"javascript:function replieMessage("+id+")\"/>");
+}
+
+function replieMessage(id)
+{
+	var m = env.msg[id];
+	var el=$("#message "+id+".comments");
+	el.html(" ");
+	$("#message "+id+".img").replaceWith("<img src="____" onClick=\"javascript:developpeMessage("+id+")\"/>";
+}
+
+function new_comment(id)
+{
+	var text=$("#new " +id).val();
+	if (!noConnection){}
+	else
+	{
+		new Comment_response(id, JSON_stringify(new Commentaire(env.msg[id].comments.length+1,{"id",env.id,"login":env.login}, \
+																								text,new Date()));
+	}
+}
+
+function newComment_reponse(id,rep)
+{
+	var com=JSON.parse(rep,revival);
+	if((com!=undefined && com.erreur==undefined))
+	{
+		var el=$(.."#meessage " +id+".comments");
+		el.append(com.getHTML());
+		env.msg[id].comments.push(com);
+		if (noConnection)
+			localdb[id]=env.msg[id];
+		else
+			alert(com.erreur);
+	}
+}
+
+function follow ()
+{
+	if (!noConnection){}
+	else
+		reponseFollow({});
+}
+
+function reponseFollow(rep)
+{
+	if(rep.erreur==undefined)
+	{
+		//On ajoute dans l'environnement le suivi de l'utilisateur fromId
+		env.follows.add(env.fromId)
+		//si on a pas de communication client/serveur, on modifie la bd local
+		if (noConnection)
+		{
+			//ajoute à follows l'utilisateur fromId
+			follows[env.id].add(env.fromId);
+		}
+		$("#add").html("<img src=\"mon_image_ne_plus_suivre\" onclick='javascript.stopFollow()'>");
+	}
+	else
+		alert(rep.erreur);
+}
