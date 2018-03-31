@@ -60,12 +60,14 @@ function completeMessages()
 
 function completeMessagesReponse(rep) 
 {
-	var tab = (JSON.parse(rep, revival)).messages;
-	for (var i=0; i < tab.length; i++) 
+	//alert(rep);
+	var lm = JSON.parse(rep);
+	for (var i=0; i < lm.length; i++)  
 	{
-		var m = listeMessages[i];
-		$("#message").append(m.getHtml());
-		env.messages[m.id] = m;
+		var m = lm[i];
+		alert(m);
+		$("#message").append(m.getHTML());
+		env.msg[m.id] = m;
 		if (m.id > env.maxId)
 			env.maxId = m.id;
 		if (m.id < env.minId)
@@ -80,7 +82,7 @@ function developpeMessage(id)
 	for (var i=0;i<m.length;i++)
 	{
 		var i=m.comments[i];
-		el.append(c.getHTMl());
+		el.append(c.getHTML());
 	}
 	el=$("#message "+id+".new_comment");
 	el.append("<form name=\"new_comment_form\" id=\"new_comment_form\" action=\"javascript:func_new_comment("+id+")\")");

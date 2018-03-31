@@ -17,6 +17,7 @@ function SetVirtualDB()
 	follows[2].add(4);
 	follows[4]=[1];
 	var c1=new Commentaire(1,"user3","hum",new Date(),0);
+	localdb[0]=new Message(41,"3408747","Bla",new Date());
 	localdb[1]=new Message(42,"3408748","Blabla",new Date());
 	localdb[2]=new Message(43,"3408749","Hello",new Date());
 	localdb[3]=new Message(44,"3408750","Buenos Dias", new Date(),c1);
@@ -27,9 +28,9 @@ function getFromLocalDB(fromId,minId,maxId,nbMax)
 	var tab=[];
 	var nb=0;
 	var f=new Set();
-	if (from>0)
-		f=follows[from];
+	if (fromId>0)
+		f=follows[fromId];
 	for (var i=localdb.length-1;i>=0;i--)
-		tab.add(localdb[i]);
+		tab[i]=localdb[i];
 	return tab;
 }
