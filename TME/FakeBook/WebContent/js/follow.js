@@ -14,7 +14,7 @@ function reponseFollow(rep)
 		{
 			follows[env.id].add(env.fromId);
 		}
-		$("#add").html("<img src=\"mon_image_ne_plus_suivre\" onclick='javascript.stopFollow()'>");
+		$("#add").html("<img src=\"mon_image_ne_plus_suivre\" onclick='javascript.stopFollow()'/>");
 	}
 	else
 		alert(rep.erreur);

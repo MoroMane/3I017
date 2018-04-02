@@ -13,17 +13,17 @@ Message.prototype.getHTML=function()
 {
 	var s="Message ID: "+this.id+" ";
 	s+="<fieldset>" + this.text;
-	s+="<br><br>";
+	s+="<br/><br/>";
 	s+="From "+this.login+" the "+this.date;
-	s+="<br>";
+	s+="<br/>";
 	s+="</fieldset>";
 	if (this.comments.texte!=undefined)
 	{
-		s+= "<br>Commentaire : "+this.comments.texte;
-		s+="<br>";
+		s+= "<br/>Commentaire : "+this.comments.texte;
+		s+="<br/>";
 	}
 	s+="</div>";
-	s+="<br>";
+	s+="<br/>";
 	return s;
 }
 
@@ -39,12 +39,12 @@ Commentaire.prototype.getHTML=function()
 {
 	var s="Commentaire ID: "+this.id+" ";
 	s+=this.text;
-	s+="<br><br>";
+	s+="<br/><br/>";
 	s+=this.score;
 	s+="From "+this.auteur+" the "+this.date;
-	s+="<br>";
+	s+="<br/>";
 	s+="</div>";
-	s+="<br>";
+	s+="<br/>";
 	return s;
 }
 
@@ -57,16 +57,18 @@ function completeMessages()
 		completeMessagesReponse(JSON.stringify(tab));
 	}
 }
-/////////////////////////////////////////////////////////////////////////
+
 function completeMessagesReponse(rep) 
 {
-	//alert(rep);
 	var lm = JSON.parse(rep);
 	for (var i=0; i < lm.length; i++)  
 	{
 		var m = lm[i];
-		//alert(m);
-		$("#message").append(m.getHTML());
+		s="<br/><fieldset>";
+		s+=m.text;
+		s+="<br/>"
+		s+="Par " +m.login + " le " + m.date
+		$("#message_users").append(s);
 		env.msg[m.id] = m;
 		if (m.id > env.maxId)
 			env.maxId = m.id;
@@ -74,6 +76,8 @@ function completeMessagesReponse(rep)
 			env.minId = m.id;
 	}
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Pour l'enregistrement procéder de la même manière (avec makeConnexionPanel)
 function developpeMessage(id)
 {
@@ -96,6 +100,7 @@ function replieMessage(id)
 	el.html(" ");
 	$("#message "+id+".img").replaceWith("<img src=\"____\" onClick=\"javascript:developpeMessage("+id+")\"/>");
 }
+
 
 function new_comment(id)
 {
