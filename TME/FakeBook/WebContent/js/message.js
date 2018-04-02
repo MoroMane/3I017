@@ -57,7 +57,7 @@ function completeMessages()
 		completeMessagesReponse(JSON.stringify(tab));
 	}
 }
-
+/////////////////////////////////////////////////////////////////////////
 function completeMessagesReponse(rep) 
 {
 	//alert(rep);
@@ -65,7 +65,7 @@ function completeMessagesReponse(rep)
 	for (var i=0; i < lm.length; i++)  
 	{
 		var m = lm[i];
-		alert(m);
+		//alert(m);
 		$("#message").append(m.getHTML());
 		env.msg[m.id] = m;
 		if (m.id > env.maxId)

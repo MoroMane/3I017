@@ -18,10 +18,6 @@ function makeProfilPanel()
 	$("body").load("html/profil.html");
 }
 
-function makeDecoPanel()
-{
-	$("body").load("html/deconnexion.html");
-}
 function makeMainPanel2(fromId,fromLogin,query)
 {
 	$("body").load("html/main.html");

@@ -8,12 +8,11 @@
 		<script type="text/javascript" src="js/messages.js"></script>
 		<script type="text/javascript" src="js/connexion.js"></script>
 	</head>
-	
 	<body>
+		<div id="global_connexion">
 		<div id="connexion">
 			<h1> Connexion </h1>
 		</div>
-	
 		<form class ="erreur_box" action="javascript:(function(){return;})()" onSubmit="javascript:connexion(this)">
 			<div class="ids">
 				<span> Login </span>
@@ -32,8 +31,10 @@
 			</div>
 		</form>
 		<div class ="links">
-			<div id="links1"> <a href="javascript:makeMdpLostPanel()"> Mot de passe oublié </a> </div>
-			<div id="links2"> <a href="javascript:makeEnregistrementPanel()"> Inscription </a> </div>
+			<br>
+			<div id="links1"> <a href="javascript:makeMdpLostPanel()" style="text-decoration: none; color:white;"> Mot de passe oublié </a> </div>
+			<div id="links2"> <a href="javascript:makeEnregistrementPanel()" style="text-decoration: none; color:white;"> Inscription </a> </div>
+		</div>
 		</div>
 	</body>
 

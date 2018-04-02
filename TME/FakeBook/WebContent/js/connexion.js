@@ -53,7 +53,7 @@ function responseConnexion(rep)
 		follows[rep.id]=new Set();
 		for (var i=0;i<rep.follows.length;i++)
 			follows[rep.id].add(rep.follows[i]);
-		makeMainPanel(rep.id,rep.login);
+		makeMainPanel2(rep.id,rep.login);
 	}
 	else
 		func_erreur(rep.erreur);
