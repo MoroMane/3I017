@@ -1,7 +1,3 @@
-html {
-     height: 100%;
-}
-
 header{
 	text-align: right;
 	background-color:#123456;
@@ -13,8 +9,9 @@ header{
 }
 
 body{
-	background: linear-gradient(to top,#123456, #234567 , #345678, #456789);
-	background-repeat: no-repeat;
+	/*background: linear-gradient(to top,#123456, #234567 , #345678, #456789);*/
+	background-repeat: repeat;
+	background-color: #345678;
 	/*background-size: 2000px;*/
 	/*background-image: url("../img/background.jpg")*/
 }

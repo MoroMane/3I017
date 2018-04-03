@@ -20,7 +20,7 @@ function SetVirtualDB()
 	localdb[0]=new Message(41,"3408747","Bla",new Date());
 	localdb[1]=new Message(42,"3408748","Blabla",new Date());
 	localdb[2]=new Message(43,"3408749","Hello",new Date());
-	localdb[3]=new Message(44,"3408750","Buenos Dias", new Date(),c1);
+	localdb[3]=new Message(44,"3408750","Buenos Dias", new Date(),[c1]);
 }
 
 function getFromLocalDB(fromId,minId,maxId,nbMax)

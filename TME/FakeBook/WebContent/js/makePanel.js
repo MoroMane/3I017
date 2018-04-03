@@ -28,7 +28,7 @@ function makeProfilPanel2(fromId,fromLogin,query)
 	if (fromId==undefined)
 		fromId=-1;
 	env.fromId=fromId;
-	env.msg=[]
+	env.msg=[];
 	env.query=query;
 	env.fromLogin=fromLogin;
 	console.log(env.fromLogin);
@@ -64,6 +64,8 @@ function makeProfilPanel2(fromId,fromLogin,query)
 			s+="<div id=\"title\"><h1 style=\"color:white;\">Page de " + fromLogin + "</h1></div>";
 			s+="<div class = \"add\">";
 			s+="<input type=\"button\" value=\"suivre\" onclick='Javascript:follow()' />";
+			s+="<br/>";
+			s+="<br/>";
 			s+="</div></div>";
 		}
 		else
@@ -73,6 +75,8 @@ function makeProfilPanel2(fromId,fromLogin,query)
 			s+="<div id=\"title\"><h1 style=\"color:white;\">Page de " + fromLogin + "</h1></div>"
 			s+="<div class = \"remove\">";
 			s+="<input type=\"button\" value=\"ne_plus_suivre\" onclick='Javascript:stopfollow()' />";
+			s+="<br/>";
+			s+="<br/>";
 			s+="</div></div>";
 		}
 	}

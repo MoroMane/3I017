@@ -38,7 +38,7 @@ function Commentaire(id, auteur, texte, date, score){
 Commentaire.prototype.getHTML=function()
 {
 	var s="Commentaire ID: "+this.id+" ";
-	s+=this.text;
+	s+=this.texte;
 	s+="<br/><br/>";
 	s+=this.score;
 	s+="From "+this.auteur+" the "+this.date;
@@ -64,16 +64,61 @@ function completeMessagesReponse(rep)
 	for (var i=0; i < lm.length; i++)  
 	{
 		var m = lm[i];
-		s="<br/><fieldset>";
+		env.msg[m.id] = m;
+		s="<div id=\"message_"+m.id+"\"";
+		s+="<br/><fieldset>";
 		s+=m.text;
 		s+="<br/>"
 		s+="Par " +m.login + " le " + m.date
+		s+="</fieldset>";
+		s+="</div>";
+		s+="<br/>";
+		s+="<fieldset>Commentaires :";
+		s+="<br/>";
+		s+="<br/>";
+		s+="<div id=\"espace_commentaire_"+m.id+"\">";
+		s+="</div>";
+		s+="</fieldset>";
+		s+="<br/>";
+		s+="<div id=\"commentaire\">";
+		s+="<form class =\"commentaire\" action=\"javascript:(function(){return;})()\" onSubmit=\"javascript:new_comment("+m.id+")\">";
+		s+="<input type=\"text\" id=\"commentaire_"+m.id+"\"/> ";
+		s+="<input type=\"submit\" value=\"Ajouter Commentaire\"/>";
+		s+="</form>";
+		s+="</div>";
+		s+="<br/>";
 		$("#message_users").append(s);
-		env.msg[m.id] = m;
 		if (m.id > env.maxId)
 			env.maxId = m.id;
 		if (m.id < env.minId)
 			env.minId = m.id;
+	}
+}
+
+function new_comment(id)
+{
+	var text=$("#commentaire_"+id).val();
+	if (!noConnection){}
+	else
+	{
+		var new_comment=new Commentaire(env.msg[id].comments.length+1,{"id":env.id,"login":env.login},text,new Date());
+		newComment_response(id, JSON.stringify(new_comment));
+	}
+}
+
+function newComment_response(id,rep)
+{
+	com=JSON.parse(rep,revival);
+	//alert(com.getHTML());
+	if((com!=undefined && com.erreur==undefined))
+	{
+		var el=$("#espace_commentaire_"+id);
+		el.append(com.getHTML());
+		env.msg[id].comments.push(com);
+		if (noConnection)
+			localdb[id]=env.msg[id];
+		else
+			alert(com.erreur);
 	}
 }
 
@@ -99,30 +144,4 @@ function replieMessage(id)
 	var el=$("#message "+id+".comments");
 	el.html(" ");
 	$("#message "+id+".img").replaceWith("<img src=\"____\" onClick=\"javascript:developpeMessage("+id+")\"/>");
-}
-
-
-function new_comment(id)
-{
-	var text=$("#new " +id).val();
-	if (!noConnection){}
-	else
-	{
-		new Comment_response(id, JSON_stringify(new Commentaire(env.msg[id].comments.length+1,{"id":env.id,"login":env.login},text,new Date())));
-	}
-}
-
-function newComment_reponse(id,rep)
-{
-	var com=JSON.parse(rep,revival);
-	if((com!=undefined && com.erreur==undefined))
-	{
-		var el=$("#message " +id+".comments");
-		el.append(com.getHTML());
-		env.msg[id].comments.push(com);
-		if (noConnection)
-			localdb[id]=env.msg[id];
-		else
-			alert(com.erreur);
-	}
 }

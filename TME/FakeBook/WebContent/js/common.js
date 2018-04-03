@@ -16,9 +16,9 @@ function revival(key,value)
 		var c= new Message(value.id,value.auteur,value.date,value.comments);
 		return c;
 	}
-	else if (value.text!=undefined)
+	else if (value.texte!=undefined)
 	{
-		var c = new commentaire(value.id,value.auteur,value.text,value.date);
+		var c = new Commentaire(value.id,value.auteur,value.texte,value.date);
 		return c;
 	}
 	else if (key=="date")
