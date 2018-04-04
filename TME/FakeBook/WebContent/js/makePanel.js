@@ -13,10 +13,52 @@ function makeMdpLostPanel()
 	$("body").load("html/mdp_lost.html");
 }
 
-function makeMainPanel(fromId,fromLogin,query)
+function makeMainPanel2(fromId,fromLogin,query)
 {
 	$("body").load("html/main.html");
 }
+
+function makeMainPanel(fromId,fromLogin,query)
+{
+	s="<header>";
+	s+="<div id=\"logo\">";
+	s+="<img src=\"img/logo.png\" alt=\"Fakebook\" height=\"42\" width=\"42\"/>";
+	s+="</div>";
+	s+="<div id=\"search\">";
+	s+="<br/>";
+	s+="<input type=\"text\" id=\"recherche\"/>";
+	s+="<input type=\"submit\" value=\"Recherche\"/>";
+	s+="</div>";
+	s+="<div id=\"connect\">";
+	s+="<br/>";
+	s+="<a href=\"javascript:makeProfilPanel2()\"> Profil </a> |";
+	s+="<a href=\"javascript:makeConnexionPanel()\"> Deconnexion </a> ";
+	s+="</div>";
+	s+="</header>";
+	s+="</head>";
+	s+="<br/>";
+	s+="<nav></nav>	";
+	s+="<section id=\"main\">";
+	s+="<div id=\"new_message\">";
+	s+="<br/>";
+	s+="<br/>";
+	s+="Message";
+	s+="<br/>";
+	s+="<br/>";
+	s+="<div id=\"bla\">";
+	s+="<input type=\"text\" id=\"message\"/>";
+	s+="</div>";
+	s+="<br/>";
+	s+="<input type=\"submit\" value=\"Post\"/>";
+	s+="<br/>";
+	s+="<br/>";
+	s+="</div>";
+	s+="<div id=\"liste_message\">";
+	s+="</div>";
+	s+="</section>";
+	$("body").html(s);
+}
+
 
 function makeProfilPanel()
 {
