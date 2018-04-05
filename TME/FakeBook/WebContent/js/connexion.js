@@ -29,16 +29,36 @@ function verif_formulaire_connexion(l,p)
 
 function connecte(login,password)
 {
-	console.log("connection de " + login + ", mdp: " + password);
+	//Local
 	var id=78;
 	var key="ABCD";
-	if (!noConnection){}
+
+	//Avec les servlets
+	//login : 3408748 mdp: monmdp
+	console.log("connection de " + login + ", mdp: " + password);
+	var url = "http://localhost:8080/FakeBook/Login?login="+login+"&pwd="+password;
+	if (!noConnection)
+	{
+		$.ajax({
+			type:"POST",
+			url:url,
+			data: "login="+login+"&pwd="+password,
+			datatype: "json",
+			success: function(rep){ 
+				responseConnexion(rep);
+			},
+			error: function (jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	}
 	else 
 		responseConnexion({"key":key,"id":id,"login":login,"follows":[2]});
 }
 
 function responseConnexion(rep)
 {
+	alert("OK");
 	if (rep.erreur==undefined)
 	{
 		env.key=rep.key;
@@ -53,9 +73,9 @@ function responseConnexion(rep)
 		follows[rep.id]=new Set();
 		for (var i=0;i<rep.follows.length;i++)
 			follows[rep.id].add(rep.follows[i]);
-		makeProfilPanel2(rep.id,rep.login);
 	}
 	else
 		func_erreur(rep.erreur);
+	makeProfilPanel2(rep.id,rep.login);
 }
 

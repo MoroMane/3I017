@@ -31,7 +31,7 @@ function makeMainPanel(fromId,fromLogin,query)
 	s+="</div>";
 	s+="<div id=\"connect\">";
 	s+="<br/>";
-	s+="<a href=\"javascript:makeProfilPanel2()\"> Profil </a> |";
+	s+="<a href=\"javascript:makeProfilPanel2()\"> Profil </a> | ";
 	s+="<a href=\"javascript:makeConnexionPanel()\"> Deconnexion </a> ";
 	s+="</div>";
 	s+="</header>";

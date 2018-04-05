@@ -1,6 +1,6 @@
 function init()
 {
-	noConnection=true;
+	noConnection=false;
 	env=new Object();
 	SetVirtualDB();
 }
@@ -8,9 +8,9 @@ function init()
 function SetVirtualDB()
 {
 	localdb=[];
-	var a1={"id":1,"login":"sly"};
-	var a2={"id:":2,"login":"fab"};
-	var a3={"id":4, "login":"joe"};
+	var a1={"id":1,"login":"sly","password":"mdp"};
+	var a2={"id:":2,"login":"fab","password":"mdp"};
+	var a3={"id":4, "login":"joe","password":"mdp"};
 	follows=[];
 	follows[1]=[2,4];
 	follows[2]=new Set();
