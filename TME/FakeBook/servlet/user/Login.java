@@ -23,11 +23,11 @@ public class Login extends HttpServlet
 			Class.forName("com.mysql.jdbc.Driver");
 			ret=servicesClasses.User.Login(login,pwd);
 		}
-		catch(Exception e)
-		{
+		catch(Exception e)		{
 			e.printStackTrace();
 		}
 		response.setContentType("text/plain");
+		//response.addHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
 		out.print(ret.toString());
 	}

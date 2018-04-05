@@ -48,9 +48,25 @@ Commentaire.prototype.getHTML=function()
 	return s;
 }
 
+
+//MODIFIER LA SERVLET POUR PRENDRE EN COMPTE ENV.QUERY ...
 function completeMessages()
 {
-	if (!noConnection){}
+	if (!noConnection)
+	{
+		var url = "http://localhost:8080/FakeBook/ListMessage?key="+env.key+"&query="+env.query+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1&nb=10"
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:"key="+env.key+"&query="+env.query+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1 &nb=10",
+			sucess: function (rep){
+				completeMessageResponse(rep);
+			},
+			error: function (jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	}
 	else
 	{
 		var tab=getFromLocalDB(env.fromId,-1,env.minId,1);
@@ -144,4 +160,62 @@ function replieMessage(id)
 	var el=$("#message "+id+".comments");
 	el.html(" ");
 	$("#message "+id+".img").replaceWith("<img src=\"____\" onClick=\"javascript:developpeMessage("+id+")\"/>");
+}
+
+function refreshMessage()
+{
+	if (env.query==undefined)
+		return;
+	if (!noConnection)
+	{
+		var url = "http://localhost:8080/FakeBook/ListMessage?key="+env.key+"&query="+env.query+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1&nb=10";
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:"key="+env.key+"&query="+env.query+"&from="+env.fromId+"&id_max=-1 &id_min="+ env.maxId+ "&nb=-1",
+			sucess : function(rep){ refreshMessageResponse(rep);}
+		});
+	}
+}
+
+function refreshMessageResponse(rep)
+{
+	var tab=JSON.parse(rep,revival)
+	for (var i=tab.length-1;i>=0;i++)
+	{
+		var m=tab[i];
+		$("#messages").prepend(m.getHTML());
+		env.msg[m.id] = m;
+		if (m.id > env.maxId)
+			env.maxId = env.id;
+		if ((env.minId<0)||(m.id<env.minId))
+			env.minId = m.id;
+	}
+}
+
+function new_message()
+{
+	var text=$("#text_new_message ").val();
+	var url = "http://localhost:8080/FakeBook/AddMessage?key="+env.key+"&message="+text;
+	
+	if (!noConnection)
+	{
+
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:"key="+env.key+"&message="+text,
+			datatype:"json",
+			success: function(rep){newMessage_response(rep)}
+		});
+	}
+	else
+	{
+		new refreshMessageResponse(id, JSON_stringify(new Message(env.msg[id].comments.length+1,{"id":env.id,"login":env.login},text,new Date())));
+	}
+}
+
+function newMessage_response(rep)
+{
+
 }

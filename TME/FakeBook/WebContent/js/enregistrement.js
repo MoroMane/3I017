@@ -76,8 +76,24 @@ function verif_formulaire_enregistrement(prenom,nom,login,email,pwd,retapez)
 	return true;
 }
 
+//MODIFIER LA SERVLET POUR PRENDRE EN COMPTE EMAIL
 function enregistre(prenom,nom,login,email,pwd)
 {
 	console.log("Enregistrment de " + prenom);
-	alert("ok");
+	var url = "http://localhost:8080/FakeBook/CreateUser?login="+login+"&name="+nom+"&fname="+prenom+"&pwd="+pwd;
+	if (!noConnection)
+	{
+		$.ajax({
+			type:"POST",
+			url:url,
+			data:"login="+login+"&name="+nom+"&fname="+prenom+"&pwd="+pwd,
+			datatype: "json",
+			success: function(rep){ 
+				alert("Vous vous êtes bien enregistré(e)");
+			},
+			error: function (jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	}
 }

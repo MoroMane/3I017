@@ -36,20 +36,16 @@ function connecte(login,password)
 	//Avec les servlets
 	//login : 3408748 mdp: monmdp
 	console.log("connection de " + login + ", mdp: " + password);
-	var url = "http://localhost:8080/FakeBook/Login?login="+login+"&pwd="+password;
+	var url1 = "Login";
 	if (!noConnection)
 	{
 		$.ajax({
-			type:"POST",
-			url:url,
-			data: "login="+login+"&pwd="+password,
-			datatype: "json",
-			success: function(rep){ 
-				responseConnexion(rep);
-			},
-			error: function (jqXHR, textStatus, errorThrown){
-				alert(textStatus);
-			}
+			type:"GET",
+			url:url1,
+			data:"login=toto&pwd=dfsfsdf",
+			datatype: "JSON",
+			success: function(rep){alert("toto");},
+			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
 	}
 	else 
