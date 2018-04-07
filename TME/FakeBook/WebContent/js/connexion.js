@@ -29,40 +29,58 @@ function verif_formulaire_connexion(l,p)
 
 function connecte(login,password)
 {
-	//Local
-	var id=78;
-	var key="ABCD";
-
 	//Avec les servlets
 	//login : 3408748 mdp: monmdp
 	console.log("connection de " + login + ", mdp: " + password);
-	var url1 = "Login";
+	var url = "Login";
 	if (!noConnection)
 	{
 		$.ajax({
 			type:"GET",
-			url:url1,
+			url:url,
 			data:"login=toto&pwd=dfsfsdf",
 			datatype: "JSON",
 			success: function(rep){alert("toto");},
 			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
 	}
-	else 
-		responseConnexion({"key":key,"id":id,"login":login,"follows":[2]});
+	//En Local
+	else
+	{
+		bool=false;
+		i=0
+		while (i<localusers.length)
+		{
+			if ((localusers[i].login==login) && (localusers[i].password==password))
+			{
+				bool=true;
+				break;
+			}
+			i=i+1;
+		}
+		if (bool)
+		{
+			var key="ABCD";
+			responseConnexion({"key":key,"id":localusers[i].id,"login":login,"follows":follows[localusers[i].id]});
+		}
+		else
+			func_erreur("Login ou mot de passe incorrect");
+	}
 }
 
 function responseConnexion(rep)
 {
-	alert("OK");
 	if (rep.erreur==undefined)
 	{
 		env.key=rep.key;
 		env.id=rep.id;
 		env.login=rep.login;
-		env.follows=new Set();
-		for (var i=0;i<rep.follows.length;i++)
-			env.follows.add(rep.follows[i]);
+		//env.follows=new Set();
+		env.follows=rep.follows;
+
+		//for (var i=0;i<rep.follows.length;i++)
+			//env.follows.add(rep.follows[i]);
+		//alert(env.follows[1]);
 	}
 	if (noConnection)
 	{
@@ -72,6 +90,6 @@ function responseConnexion(rep)
 	}
 	else
 		func_erreur(rep.erreur);
-	makeProfilPanel2(rep.id,rep.login);
+	makeProfilPanel(rep.id,rep.login);
 }
 

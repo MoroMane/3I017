@@ -49,7 +49,7 @@ nav{
 }
 
 #search{
-	display:inline-block;
+	/*display:inline-block;*/
 	position: absolute;
 	top:-5px;
 	left:50px;
@@ -68,7 +68,7 @@ nav{
 	color:white;
 }
 
-#main #new_message #bla input {
+#main #new_message #bla #main_message {
 	height: 120px;
 	width: 800px;
 }
@@ -95,4 +95,21 @@ nav{
 fieldset{
 	/*background-color: white;*/
 	width: 780px;
+	box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+input {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+input[type=text]:focus {
+    background-color: lightblue;
+}
+
+input[type=password]:focus {
+    background-color: lightblue;
 }

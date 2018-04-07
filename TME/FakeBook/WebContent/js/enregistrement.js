@@ -73,6 +73,7 @@ function verif_formulaire_enregistrement(prenom,nom,login,email,pwd,retapez)
 		func_erreur("Le mot de passe retapé est différent");
 		return false;
 	}
+	func_pass("Vous vous êtes bien enregistré");
 	return true;
 }
 

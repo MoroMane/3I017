@@ -13,26 +13,25 @@ function makeMdpLostPanel()
 	$("body").load("html/mdp_lost.html");
 }
 
-function makeMainPanel2(fromId,fromLogin,query)
-{
-	$("body").load("html/main.html");
-}
-
 function makeMainPanel(fromId,fromLogin,query)
 {
-	alert("OK");
 	s="<header>";
 	s+="<div id=\"logo\">";
 	s+="<img src=\"img/logo.png\" alt=\"Fakebook\" height=\"42\" width=\"42\"/>";
 	s+="</div>";
 	s+="<div id=\"search\">";
 	s+="<br/>";
-	s+="<input type=\"text\" id=\"recherche\"/>";
-	s+="<input type=\"submit\" value=\"Recherche\"/>";
+	//s+="<input type=\"text\" id=\"recherche\"/> ";
+	//s+="<input type=\"submit\" value=\"Rechercher\"/>";
+	s+="<form class =\"search\" action=\"javascript:(function(){return;})()\" onSubmit=\"javascript:rechercher(this)\">";
+  	s+="<input type=\"text\" name=\"search\"/> ";
+	s+="<input type=\"submit\" value=\"Rechercher\"/>";
+	s+="</form>";
 	s+="</div>";
 	s+="<div id=\"connect\">";
 	s+="<br/>";
-	s+="<a href=\"javascript:makeProfilPanel2()\"> Profil </a> | ";
+	s+="<a href=\"javascript:makeMainPanel("+env.id+",'"+env.login+"')\"> Main </a> | ";
+	s+="<a href=\"javascript:makeProfilPanel("+fromId+",'"+fromLogin+"')\"> Profil </a> | ";
 	s+="<a href=\"javascript:makeConnexionPanel()\"> Deconnexion </a> ";
 	s+="</div>";
 	s+="</header>";
@@ -47,26 +46,43 @@ function makeMainPanel(fromId,fromLogin,query)
 	s+="<br/>";
 	s+="<br/>";
 	s+="<div id=\"bla\">";
-	s+="<input type=\"text\" id=\"message\"/>";
+	s+="<form class =\"main_post\" action=\"javascript:(function(){return;})()\" onSubmit=\"javascript:new_message("+env.id+")\">";
+	s+="<input type=\"text\" id=\"main_message\"/>";
+	s+="<br/>";
+	s+="<br/>";
+	s+="<input type=\"submit\" id=\"poster\" value=\"Poster\"/>";
+	s+="</form>";
+	s+="<br/>";
 	s+="</div>";
-	s+="<br/>";
-	s+="<input type=\"submit\" value=\"Post\"/>";
-	s+="<br/>";
-	s+="<br/>";
 	s+="</div>";
 	s+="<div id=\"liste_message\">";
+
+	//Ajout des messages existant
+	if (main_message.length!=0)
+	{
+		for (var j=0; j< main_message.length; j++)
+			s+=main_message[j].getHTML();
+	}
+
+	/*
+	//Ajout des messages de la session en cours
+	if (env.msg.length!=0)
+	{
+		for (var j=0; j< env.msg.length; j++)
+		{
+			if (env.msg[j]!=undefined)
+			{
+				mess1 = new Message(env.msg[j].id,env.msg[j].login,env.msg[j].texte, env.msg[j].date, env.msg[j].comments)
+				s+=mess1.getHTML();
+			}
+		}
+	}*/
 	s+="</div>";
 	s+="</section>";
 	$("body").html(s);
 }
 
-
-function makeProfilPanel()
-{
-	$("body").load("html/profil.html");
-}
-
-function makeProfilPanel2(fromId,fromLogin,query)
+function makeProfilPanel(fromId,fromLogin,query)
 {
 	if (fromId==undefined)
 		fromId=-1;
@@ -76,23 +92,23 @@ function makeProfilPanel2(fromId,fromLogin,query)
 	env.fromLogin=fromLogin;
 	console.log(env.fromLogin);
 	var s="";
-	alert (fromId);
-	alert (fromLogin);
-
 	//HEADER
 	s+="<header>";
 	s+="<div id=\"logo\">";
-	s+="<a href=\"javascript:makeMainPanel()\"><img src=\"img/logo.png\" alt=\"Fakebook\" height=\"42\" width=\"42\"></a>";
+	s+="<a href=\"javascript:makeMainPanel("+env.id+",'"+env.login+"')\"><img src=\"img/logo.png\" alt=\"Fakebook\" height=\"42\" width=\"42\"></a>";
 	s+="</div>";
 	s+="<div id=\"search\">";
 	s+="<br/>";
-	s+="<input type=\"text\" id=\"recherche\"/> ";
-	s+="<input type=\"submit\" value=\"Recherche\"/>";
+	//s+="<input type=\"text\" id=\"recherche\"/> ";
+	s+="<form class =\"search\" action=\"javascript:(function(){return;})()\" onSubmit=\"javascript:rechercher(this)\">";
+  	s+="<input type=\"text\" name=\"search\"/> ";
+	s+="<input type=\"submit\" value=\"Rechercher\"/>";
+	s+="</form>";
 	s+="</div>";
 	s+="<div id=\"connect\">";
 	s+="<br/>";
-	//voir google string argument
-	s+="<a href=\"javascript:makeMainPanel(78,\"toto\")\"> Main </a> | ";
+	s+="<a href=\"javascript:makeMainPanel("+env.id+",'"+env.login+"')\"> Main </a> | ";
+	s+="<a href=\"javascript:makeProfilPanel("+env.id+",'"+env.login+"')\"> Profil </a> | ";
 	s+="<a href=\"javascript:makeConnexionPanel()\"> Deconnexion </a>";
 	s+="</div>";
 	s+="</header>";
@@ -108,10 +124,14 @@ function makeProfilPanel2(fromId,fromLogin,query)
 			s+="<br/>";
 			s+="<br/>";
 			s+="<div id=\"title\"><h1 style=\"color:white;\">Page de " + fromLogin + "</h1></div>";
-			s+="<div class = \"add\">";
-			s+="<input type=\"button\" value=\"suivre\" onclick='Javascript:follow()' />";
-			s+="<br/>";
-			s+="<br/>";
+			if (env.id!=fromId)
+			{
+				s+="<div id=\"follow\">";
+				s+="<input type=\"button\" value=\"Suivre\" onClick='javascript:follow();'/> ";
+				s+="<br/>";
+				s+="<br/>";
+				s+="</div>";
+			}
 			s+="</div></div>";
 		}
 		else
@@ -119,11 +139,15 @@ function makeProfilPanel2(fromId,fromLogin,query)
 			s+="<br/>";
 			s+="<br/>";
 			s+="<div id=\"title\"><h1 style=\"color:white;\">Page de " + fromLogin + "</h1></div>";
-			s+="<div class = \"remove\">";
-			s+="<input type=\"button\" value=\"ne_plus_suivre\" onclick='Javascript:stopfollow()' />";
-			s+="<br/>";
-			s+="<br/>";
-			s+="</div></div>";
+			if (env.id!=fromId)
+			{
+				s+="<div id= \"follow\">";
+				s+="<input type=\"button\" value=\"Ne plus suivre\" onclick='Javascript:stopfollow()' />";
+				s+="<br/>";
+				s+="<br/>";
+				s+="</div>";
+			}
+			s+="</div>";
 		}
 	}
 	s+="<div id=\"connect\"> <span id=\"log\" pageUser("+env.id+","+env.login+")>";
