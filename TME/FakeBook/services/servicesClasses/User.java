@@ -43,10 +43,12 @@ public class User
 			return ret;
 		}
 		//boolean root=bd.UserTools.isRoot(login);
-		//String key = bd.UserTools.insererConnexion(login,root);
 		String key = bd.UserTools.insererConnexion(login);
+		int id = bd.UserTools.get_userId(login);
 		ret.put("Status","OK");
-		ret.put("Key",key);
+		ret.put("Key", key);
+		ret.put("Id", id);
+		ret.put("Login", login);
 		return ret;
 	}
 	

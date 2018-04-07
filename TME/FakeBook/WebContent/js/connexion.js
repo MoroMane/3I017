@@ -38,9 +38,12 @@ function connecte(login,password)
 		$.ajax({
 			type:"GET",
 			url:url,
-			data:"login=toto&pwd=dfsfsdf",
+			data:"login="+login+"&pwd="+password,
 			datatype: "JSON",
-			success: function(rep){alert("toto");},
+			success: function(rep)
+			{
+				responseConnexion(rep);
+			},
 			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
 	}
@@ -69,27 +72,51 @@ function connecte(login,password)
 }
 
 function responseConnexion(rep)
-{
-	if (rep.erreur==undefined)
-	{
-		env.key=rep.key;
-		env.id=rep.id;
-		env.login=rep.login;
-		//env.follows=new Set();
-		env.follows=rep.follows;
-
-		//for (var i=0;i<rep.follows.length;i++)
-			//env.follows.add(rep.follows[i]);
-		//alert(env.follows[1]);
-	}
+{	
+	//Local
 	if (noConnection)
 	{
-		follows[rep.id]=new Set();
-		for (var i=0;i<rep.follows.length;i++)
-			follows[rep.id].add(rep.follows[i]);
+		if (rep.Error==undefined)
+		{
+			env.key=rep.key;
+			env.id=rep.id;
+			env.login=rep.login;
+			//env.follows=new Set();
+			env.follows=rep.follows;
+
+			//for (var i=0;i<rep.follows.length;i++)
+				//env.follows.add(rep.follows[i]);
+			//alert(env.follows[1]);
+		}
+		else
+		{
+			follows[rep.id]=new Set();
+			for (var i=0;i<rep.follows.length;i++)
+				follows[rep.id].add(rep.follows[i]);
+		}
+		makeProfilPanel(rep.id,rep.login);
 	}
+	//Connecté
 	else
-		func_erreur(rep.erreur);
-	makeProfilPanel(rep.id,rep.login);
+	{
+		//pour transformer la string en JSON
+		var rep2= JSON.parse(rep);
+		//Connecté
+		if(rep2.Error!=undefined)
+			func_erreur(rep2.Error);
+		if (rep2.Error==undefined)
+		{
+			env.key=rep2.Key;
+			env.id=rep2.Id;
+			env.login=rep2.Login;
+			//env.follows=new Set();
+			//env.follows=rep2.follows;
+
+			//for (var i=0;i<rep.follows.length;i++)
+				//env.follows.add(rep.follows[i]);
+			//alert(env.follows[1]);
+			makeProfilPanel(rep2.id,rep2.login);
+		}
+	}
 }
 

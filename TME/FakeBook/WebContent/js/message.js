@@ -154,7 +154,22 @@ function completeMessagesReponse(rep)
 function new_comment(id)
 {
 	var text=$("#commentaire_"+id).val();
-	if (!noConnection){}
+	if (!noConnection)
+	{
+		var new_comment=new Commentaire(env.msg[id].comments.length+1,env.login,text,new Date());
+		var url = "AddMessage";
+		$.ajax({
+			type:"GET",
+			url:url,
+			data:"key="+env.key+"&message="+text,
+			sucess: function (rep){
+				newComment_response(id, JSON.stringify(new_comment));
+			},
+			error: function (jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	}
 	else
 	{
 		//var new_comment=new Commentaire(env.msg[id].comments.length+1,{"id":env.id,"login":env.login},text,new Date());
