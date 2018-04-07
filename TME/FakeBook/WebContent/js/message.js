@@ -278,7 +278,7 @@ function newMessage_response(id,rep)
 	//mess=JSON.parse(rep,revival);
 	//alert(com.getHTML());
 	mess=rep;
-	alert(mess.text);
+	//alert(mess.text)
 	if((mess!=undefined && mess.erreur==undefined))
 	{	
 		var el=$("#liste_message");
