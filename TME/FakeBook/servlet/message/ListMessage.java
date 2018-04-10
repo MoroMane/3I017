@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.mongodb.BasicDBObject;
+
 import servicesTools.serviceRefused;
 
 @SuppressWarnings("serial")
@@ -20,17 +22,17 @@ public class ListMessage extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
 		String key=request.getParameter("key");
-		String list_id_user=request.getParameter("list_id_user");
-		List<String> myList = new ArrayList<String>(Arrays.asList(list_id_user.split(",")));
-		JSONObject ret=new JSONObject();
+		String id_user=request.getParameter("id_user");
+		BasicDBObject ret = new BasicDBObject();
+		//JSONObject ret=new JSONObject();
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			//ret=servicesClasses.Message.ListMessage(key,myList);
+			ret=servicesClasses.Message.ListMessage(key,id_user);
 		}
 		catch(Exception e)
 		{
-			ret=serviceRefused.serviceRefused("ListMessage Fail", 100);
+			//ret=serviceRefused.serviceRefused("ListMessage Fail", 100);
 		}
 		response.setContentType("text/plain");
 		PrintWriter out = response.getWriter();

@@ -76,14 +76,19 @@ Commentaire.prototype.getHTML=function()
 //MODIFIER LA SERVLET POUR PRENDRE EN COMPTE ENV.QUERY ...
 function completeMessages()
 {
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//alert("complete");
 	if (!noConnection)
 	{
 		var url = "ListMessage";
 		$.ajax({
 			type:"GET",
 			url:url,
-			data:"key="+env.key+"&query="+env.query+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1 &nb=10",
+			data:"key="+env.key+"&id_user="+env.id,
+			datatype: "JSON",
+			//data:"key="+env.key+"&id_user="+env.id+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1 &nb=10",
 			sucess: function (rep){
+				alert(rep);
 				completeMessageResponse(rep);
 			},
 			error: function (jqXHR, textStatus, errorThrown){

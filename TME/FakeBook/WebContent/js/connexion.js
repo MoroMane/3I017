@@ -88,12 +88,13 @@ function responseConnexion(rep)
 				//env.follows.add(rep.follows[i]);
 			//alert(env.follows[1]);
 		}
+		/*
 		else
 		{
 			follows[rep.id]=new Set();
 			for (var i=0;i<rep.follows.length;i++)
 				follows[rep.id].add(rep.follows[i]);
-		}
+		}*/
 		makeProfilPanel(rep.id,rep.login);
 	}
 	//Connecté

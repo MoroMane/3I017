@@ -22,8 +22,8 @@ public class Message
 		return bd.MessageTools.RemoveMessage(key,id_message);
 	}
 	
-	public static BasicDBObject ListMessage(String key, List<String> users)throws JSONException, UnknownHostException
+	public static BasicDBObject ListMessage(String key, String id_users)throws JSONException, UnknownHostException
 	{
-		return bd.MessageTools.ListMessage(key,users);
+		return bd.MessageTools.ListMessage(key,id_users);
 	}
 }

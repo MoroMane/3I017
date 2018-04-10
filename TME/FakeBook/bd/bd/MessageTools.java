@@ -59,20 +59,17 @@ public class MessageTools
 	}
 	
 	//A DEBUG
-	public static BasicDBObject ListMessage(String key, List<String> users) throws UnknownHostException
+	public static BasicDBObject ListMessage(String key,String id_users) throws UnknownHostException
 	{	
 		//int id_user = UserTools.get_userId_v2(key);
 		DBCollection message=Database.getCollection("message");
 		BasicDBObject retour=new BasicDBObject();
-		for (String a : users)
+		BasicDBObject query=new BasicDBObject("id_user",id_users);
+		DBCursor c= message.find(query);
+		while (c.hasNext())
 		{
-			BasicDBObject query=new BasicDBObject("id_user",a);
-			DBCursor c= message.find(query);
-			while (c.hasNext())
-			{
-				DBObject obj=c.next();
-				retour.append(a, obj.get("content"));
-			}
+			DBObject obj=c.next();
+			retour.append(id_users, obj.get("content"));
 		}
 		return retour;
 	}
