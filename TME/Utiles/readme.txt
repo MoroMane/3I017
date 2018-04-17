@@ -1,14 +1,4 @@
-﻿Tomcat
-A rajouter dans fichier config 
-<role rolename="manager-gui"/>
-<user username="tomcat" password="tomcat" roles="manager-gui"/>
-</tomcat-users>
-
-SQL
-mysqladmin -u root password 'root password goes here'
-C:\wamp\apps\phpmyadmin\config.inc.php
-==>$cfg['Servers'][$i]['password']  = '';  // MySQL password (only needed)
-
+﻿########################################################################################################################
 Friends
 from		int(11)
 to		int(11)	
@@ -27,13 +17,34 @@ login		varchar(64)
 password	blob
 prenom		varchar(255)
 nom		varchar(255)
-
+########################################################################################################################
+Tomcat
+A rajouter dans fichier config 
+<role rolename="manager-gui"/>
+<user username="tomcat" password="tomcat" roles="manager-gui"/>
+</tomcat-users>
+########################################################################################################################
 mongodb = use tang_fabien // show collections
 mongoexport --db tang_fabien --collection message --out tang_fabien.json
-mongoimport (à voir sur internet)
+mongoimport tang_fabien.json
 ssh -X ppti-14-308-05
 
-SQL PB de MDP ROOT
+Sous windows: 
+ajouter au path puis executer mongod puis mongo 
+mongodb compass = interface comme phpmyadmin
+
+Lien pour telecharger:
+https://www.mongodb.com/download-center#community
+
+Tuto:
+http://www.pradeepadiga.me/blog/2017/01/12/mongodb-fails-to-start-with-exception-in-initandlisten-29-error/
+https://www.tutorielsenfolie.com/tutoriels-113-Installation-et-configuration-de-MongoDB-sous-Windows.html
+########################################################################################################################
+SQL/PHPMYADMIN
+
+mysqladmin -u root password 'root password goes here'
+C:\wamp\apps\phpmyadmin\config.inc.php
+==>$cfg['Servers'][$i]['password']  = '';  // MySQL password (only needed)
 
 Follow the steps below.
 
@@ -60,3 +71,9 @@ You should now be able to connect with your new password.
 $ mysql -u root -p
 
 Enter password: my_password
+
+Dans Apache/Config/ 
+phpMyadmin (config.inc.php) 
+;
+$cfg['Servers'][$i]['password'] = 'root';
+########################################################################################################################

@@ -23,6 +23,10 @@ function func_pass(msg)
 
 function revival(key,value)
 {
+	if (value.date==undefined)
+		var d=new Date();
+		return d;
+
 	if (value.comments!=undefined)
 	{
 		var c= new Message(value.id,value.auteur,value.date,value.comments);

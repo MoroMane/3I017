@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import servicesTools.serviceAccepted;
@@ -58,19 +59,32 @@ public class MessageTools
 		}
 	}
 	
-	//A DEBUG
-	public static BasicDBObject ListMessage(String key,String id_users) throws UnknownHostException
+	public static List<JSONObject> ListMessage(String key,String id_users) throws UnknownHostException, JSONException, SQLException
 	{	
-		//int id_user = UserTools.get_userId_v2(key);
 		DBCollection message=Database.getCollection("message");
-		BasicDBObject retour=new BasicDBObject();
-		BasicDBObject query=new BasicDBObject("id_user",id_users);
+		//BasicDBObject retour=new BasicDBObject();
+		JSONObject retour= new JSONObject();
+		int id_int = Integer.parseInt(id_users); 
+		BasicDBObject query=new BasicDBObject("id_user",id_int);
 		DBCursor c= message.find(query);
+		List <JSONObject> lr = new ArrayList<JSONObject>();
 		while (c.hasNext())
 		{
 			DBObject obj=c.next();
-			retour.append(id_users, obj.get("content"));
+			JSONObject temp=new JSONObject();
+			temp.put("id", id_int);
+			String s = ((BasicBSONObject) obj).getString("content");
+			temp.put("text", s);
+			//temp.append("text", s);
+			int login = UserTools.get_userLogin(id_users);
+			String logins=Integer.toString(login);
+			temp.put("login",logins);
+			//javoue jai un peu cheaté ici
+			temp.put("date", "2018-04-17T22:14:02.778Z");
+			temp.put("comments", new ArrayList<String>());
+			lr.add(temp);
 		}
-		return retour;
-	}
+		return lr;
+	}	
+	
 }

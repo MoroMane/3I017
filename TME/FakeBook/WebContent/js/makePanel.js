@@ -30,7 +30,6 @@ function makeMainPanel(fromId,fromLogin,query)
 	s+="</div>";
 	s+="<div id=\"connect\">";
 	s+="<br/>";
-	s+="<a href=\"javascript:makeMainPanel("+env.id+",'"+env.login+"')\"> Main </a> | ";
 	s+="<a href=\"javascript:makeProfilPanel("+fromId+",'"+fromLogin+"')\"> Profil </a> | ";
 	s+="<a href=\"javascript:makeConnexionPanel()\"> Deconnexion </a> ";
 	s+="</div>";
@@ -108,7 +107,6 @@ function makeProfilPanel(fromId,fromLogin,query)
 	s+="<div id=\"connect\">";
 	s+="<br/>";
 	s+="<a href=\"javascript:makeMainPanel("+env.id+",'"+env.login+"')\"> Main </a> | ";
-	s+="<a href=\"javascript:makeProfilPanel("+env.id+",'"+env.login+"')\"> Profil </a> | ";
 	s+="<a href=\"javascript:makeConnexionPanel()\"> Deconnexion </a>";
 	s+="</div>";
 	s+="</header>";

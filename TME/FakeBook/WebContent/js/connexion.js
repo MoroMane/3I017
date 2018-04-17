@@ -81,9 +81,10 @@ function responseConnexion(rep)
 			env.key=rep.key;
 			env.id=rep.id;
 			env.login=rep.login;
-			//env.follows=new Set();
-			env.follows=rep.follows;
-
+			if (rep.follows==undefined)
+				env.follows=new Set();
+			else
+				env.follows=rep.follows;
 			//for (var i=0;i<rep.follows.length;i++)
 				//env.follows.add(rep.follows[i]);
 			//alert(env.follows[1]);
@@ -110,14 +111,16 @@ function responseConnexion(rep)
 			env.key=rep2.Key;
 			env.id=rep2.Id;
 			env.login=rep2.Login;
-			//env.follows=new Set();
-			//env.follows=rep2.follows;
-
+			if (rep2.Follows==undefined)
+				env.follows=new Set();
+			else
+				env.follows=rep2.Follows;
+			makeProfilPanel(rep2.Id,rep2.Login);
 			//for (var i=0;i<rep.follows.length;i++)
 				//env.follows.add(rep.follows[i]);
 			//alert(env.follows[1]);
-			makeProfilPanel(rep2.id,rep2.login);
 		}
 	}
 }
 
+ 

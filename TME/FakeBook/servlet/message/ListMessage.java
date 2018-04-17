@@ -22,9 +22,10 @@ public class ListMessage extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
 	{
 		String key=request.getParameter("key");
-		String id_user=request.getParameter("id_user");
-		BasicDBObject ret = new BasicDBObject();
-		//JSONObject ret=new JSONObject();
+		String id_user=request.getParameter("id");
+		//BasicDBObject ret = new BasicDBObject();
+		//JSONObject ret = new JSONObject();
+		List<JSONObject> ret = new ArrayList<JSONObject>();
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();

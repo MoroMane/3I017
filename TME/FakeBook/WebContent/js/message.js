@@ -72,40 +72,39 @@ Commentaire.prototype.getHTML=function()
 	return s;
 }
 
-
-//MODIFIER LA SERVLET POUR PRENDRE EN COMPTE ENV.QUERY ...
+//data:"key="+env.key+"&id_user="+env.id+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1 &nb=10",
+			
 function completeMessages()
 {
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//alert("complete");
+	var url = "ListMessage";
 	if (!noConnection)
 	{
-		var url = "ListMessage";
 		$.ajax({
 			type:"GET",
 			url:url,
-			data:"key="+env.key+"&id_user="+env.id,
+			data:"key="+env.key+"&id="+env.id,
 			datatype: "JSON",
-			//data:"key="+env.key+"&id_user="+env.id+"&from="+env.fromId+"&id_max"+env.mindId+"&id_min=-1 &nb=10",
-			sucess: function (rep){
-				alert(rep);
-				completeMessageResponse(rep);
+			success: function(rep)
+			{
+				//alert(rep);
+				completeMessagesReponse(rep);
 			},
-			error: function (jqXHR, textStatus, errorThrown){
-				alert(textStatus);
-			}
+			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
 	}
 	else
 	{
 		var tab=getFromLocalDB(env.fromId,-1,env.minId,1);
+		//alert(tab);
 		completeMessagesReponse(JSON.stringify(tab));
 	}
 }
 
 function completeMessagesReponse(rep) 
 {
+	alert(rep);
 	var lm = JSON.parse(rep);
+	alert(lm);
 	for (var i=0; i < lm.length; i++)  
 	{
 		var m = lm[i];
@@ -128,7 +127,7 @@ function completeMessagesReponse(rep)
 		s+="<br/>";
 		s+="<div id=\"espace_commentaire_"+m.id+"\">";
 		//Ajout des commentaires existant
-		if (m.comments.length!=0)
+		if ((m.comments!=undefined) && (m.comments.length!=0))
 		{
 			for (var j=0; j< m.comments.length; j++)
 			{
