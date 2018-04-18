@@ -1,6 +1,6 @@
 function init()
 {
-	noConnection=false;
+	noConnection=true;
 	env=new Object();
 	SetVirtualDB();
 }

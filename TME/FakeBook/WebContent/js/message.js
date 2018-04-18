@@ -102,9 +102,9 @@ function completeMessages()
 
 function completeMessagesReponse(rep) 
 {
-	alert(rep);
+	//alert(rep);
 	var lm = JSON.parse(rep);
-	alert(lm);
+	//alert(lm);
 	for (var i=0; i < lm.length; i++)  
 	{
 		var m = lm[i];
