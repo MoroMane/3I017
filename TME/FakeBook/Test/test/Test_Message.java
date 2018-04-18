@@ -14,10 +14,10 @@ import com.mongodb.DBCollection;
 public class Test_Message {
 	public static void main(String[] args) throws SQLException, JSONException, ClassNotFoundException, UnknownHostException {
 	DBCollection c=bd.Database.getCollection("message");
-	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","Petit frère n'a qu'un souhait devenir grand"));
-	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","C'est pourquoi il s'obstine à jouer les sauvages dès l'âge de dix ans"));
-	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","Devenir adulte avec les infos comme mentor"));
-	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","C'est éclater les tronches de ceux qui ne sont pas d'accord"));
+	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","J'finis pas mes phrases, j'connais pas les points "));
+	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","J'commence après-demain, j'contrôle pas l'destin "));
+	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","Rien est assez bien, j'finis jamais rien "));
+	//System.out.println("Add Message: "+servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","Manquerait la moitié des traits si j'devais t'faire un dessins"));
 	
 	//System.out.println(servicesClasses.Message.AddMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","test22"));
 	System.out.println(servicesClasses.Message.ListMessage("BAIjpgGzeTkczqYFuZZgrBYsnPrRreoo","40"));

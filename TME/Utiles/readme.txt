@@ -18,6 +18,9 @@ password	blob
 prenom		varchar(255)
 nom		varchar(255)
 ########################################################################################################################
+Eclipse
+Toujours re-configurer le build paths sinon problème lors de la compil
+########################################################################################################################
 Tomcat
 A rajouter dans fichier config 
 <role rolename="manager-gui"/>
@@ -26,7 +29,7 @@ A rajouter dans fichier config
 ########################################################################################################################
 mongodb = use tang_fabien // show collections
 mongoexport --db tang_fabien --collection message --out tang_fabien.json
-mongoimport tang_fabien.json
+mongoimport tang_fabien.json --db tang_fabien --collection message
 ssh -X ppti-14-308-05
 
 Sous windows: 
