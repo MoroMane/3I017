@@ -1,4 +1,4 @@
-function Message(id,login,text,date,comments)
+function Message(id,login,text,date,comments,like)
 {
 	this.id=id;
 	this.login=login;
@@ -7,6 +7,9 @@ function Message(id,login,text,date,comments)
 	if (comments == undefined)
 		comments=[];
 	this.comments=comments;
+	if (like == undefined)
+		like=0;
+	this.like=like;
 }
 Message.prototype.getHTML=function()
 {
@@ -20,7 +23,10 @@ Message.prototype.getHTML=function()
 	s+="<br/>";
 	s+=this.text;
 	s+="<br/>";
-	s+="From "+this.login+" the "+this.date;
+	s+="Par "+this.login+" le "+this.date;
+	s+="<br/>";
+	s+="<br/>";
+	s+="Like: "+this.like;
 	s+="<br/>";
 	s+="<br/>";
 	s+="<fieldset>Commentaires";
@@ -117,9 +123,14 @@ function completeMessagesReponse(rep)
 		s+="<br/>";
 		s+="<br/>";
 		s+="<fieldset>";
+		s+="Message ID: "+m.id+" ";
+		s+="<br/>";
 		s+=m.text;
 		s+="<br/>"
-		s+="Par " +m.login + " le " + m.date
+		s+="Par " +m.login + " le " + m.date;
+		s+="<br/>";
+		s+="<br/>";
+		s+="Like: "+m.like;
 		s+="<br/>";
 		s+="<br/>";
 		s+="<fieldset>Commentaires";
@@ -219,10 +230,14 @@ function developpeMessage(id)
 	s+="<br/>";
 	s+="<br/>";
 	s+="<fieldset>";
+	s+="Message ID: "+m.id+" ";
+	s+="<br/>";
 	s+=m.text;
 	s+="<br/>"
 	s+="Par " +m.login + " le " + m.date;
-
+	s+="<br/>";
+	s+="<br/>";
+	s+="Like: "+m.like;
 	s+="<br/>";
 	s+="<br/>";
 	s+="<fieldset>Commentaires";
@@ -262,6 +277,8 @@ function replieMessage(id)
 }
 
 
+
+//MAIN
 function new_message(id)
 {
 	var text=$("#main_message").val();
@@ -303,6 +320,52 @@ function newMessage_response(id,rep)
 		var el=$("#liste_message");
 		el.append(mess.getHTML());
 		main_message[main_message.length]=mess;
+		/*
+		if (noConnection)
+			//localdb[id]=env.msg[id];
+		else
+			alert(com.erreur);*/
+	}
+}
+
+//new message profile users
+function new_message_users(id)
+{
+	var text=$("#main_message").val();
+	var url = "AddMessage";
+	if (!noConnection)
+	{
+		$.ajax({
+			type:"GET",
+			url:url,
+			data:"key="+env.key+"&message="+text,
+			datatype:"JSON",
+			sucess : function(rep)
+			{
+				var new_message=new Message(rep.id, env.login,text,rep.date);
+				newMessage_users_response(id,new_message);
+			},
+			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
+		});
+	}
+	else
+	{
+		var new_message=new Message(localdb[localdb.length-1].id+1, env.login,text,new Date());
+		newMessage_users_response(id,new_message);
+	}
+}
+
+function newMessage_users_response(id,rep)
+{
+	//mess=JSON.parse(rep,revival);
+	//alert(com.getHTML());
+	mess=rep;
+	//alert(mess.text)
+	if((mess!=undefined && mess.erreur==undefined))
+	{	
+		var el=$("#message_users");
+		el.append(mess.getHTML());
+		localdb[localdb.length]=mess;
 		/*
 		if (noConnection)
 			//localdb[id]=env.msg[id];

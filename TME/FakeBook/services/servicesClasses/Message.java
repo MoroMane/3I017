@@ -8,8 +8,6 @@ import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mongodb.BasicDBObject;
-
 public class Message 
 {
 	public static JSONObject AddMessage(String key,String message)throws JSONException, UnknownHostException, SQLException

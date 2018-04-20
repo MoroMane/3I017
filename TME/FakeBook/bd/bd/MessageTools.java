@@ -24,22 +24,33 @@ import bd.UserTools;
 
 public class MessageTools
 {
-	public static JSONObject AddMessage(String key,String message) throws UnknownHostException, SQLException
+	public static JSONObject AddMessage(String key,String message) throws UnknownHostException, SQLException, JSONException
 	{
 		DBCollection message_co=Database.getCollection("message");
 		BasicDBObject bdo=new BasicDBObject();
 		int id_user = UserTools.get_userId_v2(key);
 		GregorianCalendar calendar = new GregorianCalendar();
 		Date today= calendar.getTime();
+		JSONObject ret=new JSONObject();
 		if (id_user==0)
 			return serviceRefused.serviceRefused("Key associé à aucun utilisateur", 100);
 		else
 		{
+			int idm=(int)( Math.random()*( 1000000000 - 1 + 1 ) ) + 1;
+			bdo.put("id", idm);
 			bdo.put("id_user", id_user);
 			bdo.put("content", message);
 			bdo.put("date",today);
+			bdo.put("comments", new ArrayList<String>());
+			bdo.put("like", 0);
 			message_co.insert(bdo);
-			return serviceAccepted.serviceAccepted();
+			ret.put("id",idm);
+			ret.put("id_user", id_user);
+			ret.put("content", message);
+			ret.put("date",today);
+			ret.put("comments", new ArrayList<String>());
+			ret.put("like", 0);
+			return ret;
 		}
 	}
 	
@@ -58,12 +69,11 @@ public class MessageTools
 			return serviceAccepted.serviceAccepted();
 		}
 	}
-	
+		
 	public static List<JSONObject> ListMessage(String key,String id_users) throws UnknownHostException, JSONException, SQLException
 	{	
 		DBCollection message=Database.getCollection("message");
 		//BasicDBObject retour=new BasicDBObject();
-		JSONObject retour= new JSONObject();
 		int id_int = Integer.parseInt(id_users); 
 		BasicDBObject query=new BasicDBObject("id_user",id_int);
 		DBCursor c= message.find(query);
@@ -71,17 +81,18 @@ public class MessageTools
 		while (c.hasNext())
 		{
 			DBObject obj=c.next();
-			JSONObject temp=new JSONObject();
-			temp.put("id", id_int);
+			JSONObject temp=new JSONObject();			
 			String s = ((BasicBSONObject) obj).getString("content");
 			temp.put("text", s);
-			//temp.append("text", s);
+			Integer id = ((BasicBSONObject) obj).getInt("id");
+			temp.put("id", id);
 			int login = UserTools.get_userLogin(id_users);
 			String logins=Integer.toString(login);
 			temp.put("login",logins);
-			//javoue jai un peu cheat� ici
-			temp.put("date", "2018-04-17T22:14:02.778Z");
-			temp.put("comments", new ArrayList<String>());
+			Date d=((BasicBSONObject) obj).getDate("date");
+			temp.put("date", d);
+			temp.put("comments", ((BasicBSONObject) obj).get("comments"));
+			temp.put("like", ((BasicBSONObject) obj).getInt("like"));
 			lr.add(temp);
 		}
 		return lr;

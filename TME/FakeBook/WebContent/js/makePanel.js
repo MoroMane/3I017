@@ -151,6 +151,21 @@ function makeProfilPanel(fromId,fromLogin,query)
 	s+="<div id=\"connect\"> <span id=\"log\" pageUser("+env.id+","+env.login+")>";
 	s+="<br/>";
 	s+="</div>";
+
+
+	s+="<div id=\"new_message\">";
+	s+="<div id=\"bla\">";
+	s+="<form class =\"main_post\" action=\"javascript:(function(){return;})()\" onSubmit=\"javascript:new_message_users("+env.id+")\">";
+	s+="<input type=\"text\" id=\"main_message\"/>";
+	s+="<br/>";
+	s+="<br/>";
+	s+="<input type=\"submit\" id=\"poster\" value=\"Poster\"/>";
+	s+="</form>";
+	s+="<br/>";
+	s+="</div>";
+	s+="</div>";
+
+
 	s+="<div id=\"message_users\">";
 	s+="</div>";
 	s+="</div>";
