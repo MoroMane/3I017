@@ -15,7 +15,9 @@ import com.mongodb.Mongo;
 public class Database 
 {
 	private DataSource dataSource;
+	@SuppressWarnings("unused")
 	private static Database database=null;
+	
 	public Database(String jndiname) throws SQLException
 	{
 		try
@@ -31,20 +33,19 @@ public class Database
 		return dataSource.getConnection();
 	}
 	
-	@SuppressWarnings("unused")
 	public static Connection getMySqlConnection() throws SQLException
 	{
-		if (DBStatic.mysql_pooling==false)
-		{
+//		if (DBStatic.mysql_pooling==false)
+//		{
 			return (DriverManager.getConnection
 					("jdbc:mysql://"+DBStatic.mysql_host+"/"+DBStatic.mysql_db, DBStatic.mysql_username, DBStatic.mysql_password));
-		}
-		else
-		{
-			if (database==null)
-				database=new Database ("jdbc/db");
-			return (database.getConnection());
-		}
+//		}
+//		else
+//		{
+//			if (database==null)
+//				database=new Database ("jdbc/db");
+//			return (database.getConnection());
+//		}
 	}
 	//MongoDb
 	public static DBCollection getCollection(String nom_collection) throws UnknownHostException

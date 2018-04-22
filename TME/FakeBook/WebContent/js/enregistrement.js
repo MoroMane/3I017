@@ -73,28 +73,27 @@ function verif_formulaire_enregistrement(prenom,nom,login,email,pwd,retapez)
 		func_erreur("Le mot de passe retapé est différent");
 		return false;
 	}
-	func_pass("Vous vous êtes bien enregistré");
 	return true;
 }
 
-//MODIFIER LA SERVLET POUR PRENDRE EN COMPTE EMAIL
 function enregistre(prenom,nom,login,email,pwd)
 {
 	console.log("Enregistrment de " + prenom);
-	var url = "http://localhost:8080/FakeBook/CreateUser?login="+login+"&name="+nom+"&fname="+prenom+"&pwd="+pwd;
+	var url = "CreateUser";
 	if (!noConnection)
 	{
 		$.ajax({
-			type:"POST",
+			type:"GET",
 			url:url,
 			data:"login="+login+"&name="+nom+"&fname="+prenom+"&pwd="+pwd,
-			datatype: "json",
-			success: function(rep){ 
-				alert("Vous vous êtes bien enregistré(e)");
+			datatype: "JSON",
+			success: function(rep)
+			{ 
+				func_pass("Vous vous êtes bien enregistré");
 			},
-			error: function (jqXHR, textStatus, errorThrown){
-				alert(textStatus);
-			}
+			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);}
 		});
 	}
+	else
+		func_pass("Vous vous êtes bien enregistré");
 }

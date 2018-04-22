@@ -159,6 +159,20 @@ public class UserTools
 		return user_login;
 	}
 	
+	public static String get_userLogin2(String id) throws SQLException
+	{		
+		Connection c=bd.Database.getMySqlConnection();
+		Statement lecture = c.createStatement();
+		String query="select * from Users where id='"+id+"';";
+		ResultSet cursor=lecture.executeQuery(query);
+		String user_login="";
+		while (cursor.next())
+			user_login=cursor.getString("login");
+		lecture.close();
+		c.close();
+		return user_login;
+	}
+	
 	
 	
 	public static String generate_key() 

@@ -56,13 +56,17 @@ function makeMainPanel(fromId,fromLogin,query)
 	s+="</div>";
 	s+="<div id=\"liste_message\">";
 
-	//Ajout des messages existant
-	if (main_message.length!=0)
+	if (noConnection)
 	{
-		for (var j=0; j< main_message.length; j++)
-			s+=main_message[j].getHTML();
+		//Ajout des messages existant
+		if (main_message.length!=0)
+		{
+			for (var j=0; j< main_message.length; j++)
+				s+=main_message[j].getHTML();
+		}
 	}
-
+	else
+		completeMessagesMain();
 	/*
 	//Ajout des messages de la session en cours
 	if (env.msg.length!=0)

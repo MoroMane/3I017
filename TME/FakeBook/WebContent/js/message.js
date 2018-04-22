@@ -92,7 +92,6 @@ function completeMessages()
 			datatype: "JSON",
 			success: function(rep)
 			{
-				//alert(rep);
 				completeMessagesReponse(rep);
 			},
 			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
@@ -106,9 +105,96 @@ function completeMessages()
 	}
 }
 
+function completeMessagesMain()
+{
+	var url = "ListMessageMain";
+	if (!noConnection)
+	{
+		$.ajax({
+			type:"GET",
+			url:url,
+			data:"key="+env.key+"&id="+env.id,
+			datatype: "JSON",
+			success: function(rep)
+			{
+				completeMessagesReponseMain(rep);
+			},
+			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
+		});
+	}
+	else
+	{
+		var tab=getFromLocalDB(env.fromId,-1,env.minId,1);
+		//alert(tab);
+		completeMessagesReponseMain(JSON.stringify(tab));
+	}
+}
+
 function completeMessagesReponse(rep) 
 {
-	//alert(rep);
+	var lm = JSON.parse(rep);
+	for (var i=0; i < lm.length; i++)  
+	{
+		var m = lm[i];
+		if (m != null)
+		{
+			env.msg[m.id]=m;
+		//s="<br/>";
+		s="<div id=\"message_"+m.id+"\">";
+		s+="<input type=\"button\" value=\"-\" onClick='javascript:replieMessage("+m.id+");'/> ";
+		s+="<br/>";
+		s+="<br/>";
+		s+="<fieldset>";
+		s+="Message ID: "+m.id+" ";
+		s+="<br/>";
+		s+=m.text;
+		s+="<br/>"
+		s+="Par " +m.login + " le " + m.date;
+		s+="<br/>";
+		s+="<br/>";
+		s+="Like: "+m.like;
+		s+="<br/>";
+		s+="<br/>";
+		s+="<fieldset>Commentaires";
+		s+="<br/>";
+		s+="<br/>";
+		s+="<div id=\"espace_commentaire_"+m.id+"\">";
+		//Ajout des commentaires existant
+		if (noConnection)
+		{
+			if ((m.comments!=undefined) && (m.comments.length!=0))
+			{
+				for (var j=0; j< m.comments.length; j++)
+				{
+					com1 = new Commentaire(m.comments[j].id,m.comments[j].auteur,m.comments[j].texte, m.comments[j].date, m.comments[j].score)
+					s+=com1.getHTML();
+				}
+			}
+		}
+		else
+			completeComment();
+		s+="</div>";
+		s+="<div id=\"commentaire\">";
+		s+="<form class =\"commentaire\" action=\"javascript:(function(){return;})()\" onSubmit=\"javascript:new_comment("+m.id+")\">";
+		s+="<input type=\"text\" id=\"commentaire_"+m.id+"\"/> ";
+		s+="<input type=\"submit\" value=\"Commenter\"/>";
+		s+="</form>";
+		s+="</div>";
+		s+="</fieldset>";
+		s+="</div>";
+		s+="</fieldset>";
+		s+="<br/>";
+		$("#message_users").append(s);
+		if (m.id > env.maxId)
+			env.maxId = m.id;
+		if (m.id < env.minId)
+			env.minId = m.id;
+		}
+	}
+}
+
+function completeMessagesReponseMain(rep) 
+{
 	var lm = JSON.parse(rep);
 	//alert(lm);
 	for (var i=0; i < lm.length; i++)  
@@ -157,7 +243,7 @@ function completeMessagesReponse(rep)
 		s+="</div>";
 		s+="</fieldset>";
 		s+="<br/>";
-		$("#message_users").append(s);
+		$("#liste_message").append(s);
 		if (m.id > env.maxId)
 			env.maxId = m.id;
 		if (m.id < env.minId)
@@ -165,24 +251,52 @@ function completeMessagesReponse(rep)
 		}
 	}
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function completeComment()
+{
+	var url = "ListComment";
+	if (!noConnection)
+	{
+		$.ajax({
+			type:"GET",
+			url:url,
+			data:"key="+env.key+"&id="+env.id,
+			datatype: "JSON",
+			success: function(rep)
+			{
+				completeCommentReponse(rep);
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
+				//alert(textStatus);
+			},
+		});
+	}
+}
+
+function completeCommentResponse(rep)
+{
+	alert("A voir avec le prof niveau servlet");
+}
+
 
 function new_comment(id)
 {
 	var text=$("#commentaire_"+id).val();
 	if (!noConnection)
 	{
-		var new_comment=new Commentaire(env.msg[id].comments.length+1,env.login,text,new Date());
-		var url = "AddMessage";
+		//var new_comment=new Commentaire(env.msg[id].comments.length+1,env.login,text,new Date());
+		var url = "AddComment";
 		$.ajax({
 			type:"GET",
 			url:url,
-			data:"key="+env.key+"&message="+text,
-			sucess: function (rep){
-				newComment_response(id, JSON.stringify(new_comment));
+			data:"key="+env.key+"&id_message="+id+"&comment="+text,
+			datatype: "JSON",
+			success: function(rep)
+			{
+				makeProfilPanel(env.id,env.login);
 			},
-			error: function (jqXHR, textStatus, errorThrown){
-				alert(textStatus);
-			}
+			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
 	}
 	else
@@ -192,7 +306,7 @@ function new_comment(id)
 		newComment_response(id, JSON.stringify(new_comment));
 	}
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function newComment_response(id,rep)
 {
 	com=JSON.parse(rep,revival);
@@ -282,15 +396,18 @@ function replieMessage(id)
 function new_message(id)
 {
 	var text=$("#main_message").val();
-	var url = "AddMessage";
+	var url = "AddMessageMain";
 	if (!noConnection)
 	{
 		$.ajax({
 			type:"GET",
 			url:url,
 			data:"key="+env.key+"&message="+text,
-			datatype:"json",
-			sucess : function(rep){ newMessage_response(rep);},
+			datatype: "JSON",
+			success: function(rep)
+			{
+				makeMainPanel(env.id,env.login);
+			},
 			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
 	}
@@ -339,11 +456,10 @@ function new_message_users(id)
 			type:"GET",
 			url:url,
 			data:"key="+env.key+"&message="+text,
-			datatype:"JSON",
-			sucess : function(rep)
+			datatype: "JSON",
+			success: function(rep)
 			{
-				var new_message=new Message(rep.id, env.login,text,rep.date);
-				newMessage_users_response(id,new_message);
+				makeProfilPanel(env.id,env.login);
 			},
 			error: function (jqXHR, textStatus, errorThrown){alert(textStatus);},
 		});
@@ -366,6 +482,7 @@ function newMessage_users_response(id,rep)
 		var el=$("#message_users");
 		el.append(mess.getHTML());
 		localdb[localdb.length]=mess;
+		//makeProfilPanel(env.id,env.login);
 		/*
 		if (noConnection)
 			//localdb[id]=env.msg[id];

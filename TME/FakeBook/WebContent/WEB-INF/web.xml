@@ -32,6 +32,11 @@
 		<servlet-name>AddMessage</servlet-name>
 		<servlet-class>message.AddMessage</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>AddMessageMain</servlet-name>
+		<servlet-class>message.AddMessageMain</servlet-class>
+	</servlet>
 
 	<servlet>
 		<servlet-name>RemoveMessage</servlet-name>
@@ -42,6 +47,17 @@
 		<servlet-name>ListMessage</servlet-name>
 		<servlet-class>message.ListMessage</servlet-class>
 	</servlet>			
+
+	<servlet>
+		<servlet-name>ListMessageMain</servlet-name>
+		<servlet-class>message.ListMessageMain</servlet-class>
+	</servlet>			
+
+	<servlet>
+		<servlet-name>AddComment</servlet-name>
+		<servlet-class>comments.AddComment</servlet-class>
+	</servlet>
+
 
 	<servlet>
 		<servlet-name>AddFriend</servlet-name>
@@ -82,16 +98,30 @@
 		<servlet-name>AddMessage</servlet-name>
 		<url-pattern>/AddMessage</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AddMessageMain</servlet-name>
+		<url-pattern>/AddMessageMain</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>RemoveMessage</servlet-name>
 		<url-pattern>/RemoveMessage</url-pattern>
 	</servlet-mapping>
 	
-	
 	<servlet-mapping>
 		<servlet-name>ListMessage</servlet-name>
 		<url-pattern>/ListMessage</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ListMessageMain</servlet-name>
+		<url-pattern>/ListMessageMain</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AddComment</servlet-name>
+		<url-pattern>/AddComment</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

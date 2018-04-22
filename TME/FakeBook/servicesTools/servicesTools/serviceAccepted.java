@@ -2,8 +2,9 @@ package servicesTools;
 
 import org.json.JSONObject;
 
-public class serviceAccepted {
-	
+public class serviceAccepted 
+{
+	@SuppressWarnings("all")
 	public static JSONObject serviceAccepted ()
 	{
 		JSONObject response=new JSONObject();

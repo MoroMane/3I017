@@ -3,7 +3,8 @@ package servicesTools;
 import org.json.JSONObject;
 
 public class serviceRefused 
-{
+{	
+	@SuppressWarnings("all")
 	public static JSONObject serviceRefused (String n, int idError)
 	{
 		JSONObject response=new JSONObject();
