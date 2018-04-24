@@ -30,6 +30,8 @@ A rajouter dans fichier config
 mongodb = use tang_fabien // show collections
 mongoexport --db tang_fabien --collection message --out tang_fabien.json
 mongoimport tang_fabien.json --db tang_fabien --collection message
+mongoimport tang_fabien_user.json --db tang_fabien --collection message
+mongoimport tang_fabien_main.json --db tang_fabien --collection message_main
 ssh -X ppti-14-308-05
 
 Sous windows: 
